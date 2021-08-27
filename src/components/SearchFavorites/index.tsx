@@ -4,7 +4,6 @@ import { TextInputProps } from 'react-native';
 import { Container, TextInput, ButtonClearInput, Icon } from './styles';
 
 interface InputProps extends TextInputProps {
-  type?: string;
   name?: string;
 }
 

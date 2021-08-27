@@ -3,7 +3,7 @@ import { TextInputProps } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
 // IMPORT DEBOUNCE
-import useDebounce from '../../utils/useDebounce';
+// import useDebounce from '../../utils/useDebounce';
 
 import { Container, TextInput, Icon, ButtonGoBack, ButtonClearInput } from './styles';
 
@@ -18,16 +18,11 @@ const SearchInput: React.FC<InputProps> = ({ value = '', ...rest }) => {
 
   const { goBack } = useNavigation();
 
-  // const [displayValue, setDisplayValue] = useState(value);
+  const [displayValue, setDisplayValue] = useState(value);
   // const debouncedChange = useDebounce(onChangeText, 300);
 
   const [isFocused, setIsFocused] = useState(false);
   const [isFilled, setIsFilled] = useState(false);
-
-  // function handleChange(inputRef: { current: { value: React.SetStateAction<string>; }; }){
-  //   setDisplayValue(inputRef.current.value);
-  //   debouncedChange(inputRef.current.value);
-  // }
 
   useEffect(() => {
     inputRef.current.focus();
@@ -47,11 +42,16 @@ const SearchInput: React.FC<InputProps> = ({ value = '', ...rest }) => {
     goBack();
   }, []);
 
+  // function handleChange(inputRef: { current: React.SetStateAction<string | undefined>; }){
+  //   setDisplayValue(inputRef.current);
+  //   debouncedChange(inputRef.current);
+  // }
+
   return (
     <Container isFocused={isFocused}>
       <ButtonGoBack onPress={navigateBack} activeOpacity={0.8}>
         <Icon 
-          name="arrow-left" 
+          name="arrow-left"
           size={22} 
           color="#969696" 
         />
@@ -62,6 +62,7 @@ const SearchInput: React.FC<InputProps> = ({ value = '', ...rest }) => {
         onFocus={handleInputFocus}
         onBlur={handleInputBlur}
         value={value}
+        // onChangeText={handleChange}
         placeholderTextColor="#969696"
         testID="search-input"
         {...rest}

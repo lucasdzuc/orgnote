@@ -1,11 +1,11 @@
 import { useRef } from 'react';
 
-interface Props {
-  fn(text: string): void;
-  delay: number;
-}
+// interface Props {
+//   fn(text: string): void;
+//   delay: number;
+// }
 
-export default function useDebounce({fn, delay}: Props){
+export default function useDebounce(fn: (arg0: any) => void, delay: any){
 
   const timeoutRef = useRef(null);
   
