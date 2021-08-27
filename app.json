@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "loomertech",
-    "slug": "loomertech",
+    "name": "Org Note",
+    "slug": "orgnote",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",

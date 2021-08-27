@@ -91,9 +91,9 @@ const AppRoutes: React.FC = () => {
             // },
             title: 'Suas organizações salvas',
             headerTitleStyle: {
-              color: '#000',
               fontFamily: 'arimoregular',
               fontSize: 16,
+              color: '#000',
             },
             headerStyle: {
               backgroundColor: '#fafafa',

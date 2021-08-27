@@ -31,8 +31,8 @@ import {
   AreaButtons,
   ButtonAcessLink,
   TextButtonAcessLink,
-  ButtonSavedFavorityOrg,
-  TextButtonSavedFavorityOrg,
+  // ButtonSavedFavorityOrg,
+  // TextButtonSavedFavorityOrg,
   ButtonSaveFavorityOrg,
   TextButtonSaveFavorityOrg,
   MessageNotFoundOrg,
@@ -45,6 +45,7 @@ interface OrganizationsFavorites {
   description?: string;
   avatar_url?: string;
   html_url?: string;
+  isFavorite: boolean;
 }
 
 const Favorites: React.FC = () => {
@@ -52,6 +53,7 @@ const Favorites: React.FC = () => {
   const { favorites, addOrgFavorites, removeOrgFavorites } = useFavorites();
 
   const [searchFavority, setSearchFavority] = useState('');
+  const [isFavorite, setIsFavorite] = useState(false);
 
   const openOrganization = useCallback((url: string) => {
     Linking.openURL(url);
@@ -69,7 +71,8 @@ const Favorites: React.FC = () => {
     } else {
       addOrgFavorites([org]);
     }
-  }, [favorites]);
+    setIsFavorite(!isFavorite);
+  }, [isFavorite, favorites]);
 
   return (
     <Container>
@@ -96,7 +99,7 @@ const Favorites: React.FC = () => {
             </HeaderContainerList>
           }
           renderItem={({ item }) => (
-            filterFavorites.length !== null ? (
+            filterFavorites.length > 0 ? (
               <Org>
                 <OrgInternContainer>
                   <OrgAvatarContainer>
@@ -114,17 +117,19 @@ const Favorites: React.FC = () => {
                     <TextButtonAcessLink>Acessar</TextButtonAcessLink>
                   </ButtonAcessLink>
 
-                  <ButtonSavedFavorityOrg onPress={() => toggleFavorite(item)} testID={`item-${item.id}`} activeOpacity={0.6}>
-                    <SalvoBrancoIcon width={20} height={20} />
-                    <TextButtonSavedFavorityOrg>Salvo</TextButtonSavedFavorityOrg>
-                  </ButtonSavedFavorityOrg>
+                  <ButtonSaveFavorityOrg onPress={() => toggleFavorite(item)} testID={`item-${item.id}`} isFavorite={item.isFavorite} activeOpacity={0.6}>
+                    {item.isFavorite ? <SalvoBrancoIcon width={20} height={20} /> : <SalvoAzulIcon width={20} height={20} /> }
+                    <TextButtonSaveFavorityOrg isFavorite={item.isFavorite}>{item.isFavorite ? 'Salvo' : 'Salvar' }</TextButtonSaveFavorityOrg>
+                  </ButtonSaveFavorityOrg>
                 </AreaButtons>
               </Org>
             ) : (
-              <MessageNotFoundOrg>
-                <EmojiTristeIcon width={20} height={20} />
-                <TextMessageNotFoundOrg>Oops! Não encontramos organizações{'\n'}com este nome.</TextMessageNotFoundOrg>
-              </MessageNotFoundOrg>
+              searchFavority.length > 0 && filterFavorites.length === 0 && (
+                <MessageNotFoundOrg>
+                  <EmojiTristeIcon width={20} height={20} />
+                  <TextMessageNotFoundOrg>Oops! Não encontramos organizações{'\n'}com este nome.</TextMessageNotFoundOrg>
+                </MessageNotFoundOrg>
+              )
             )
           )}
         />

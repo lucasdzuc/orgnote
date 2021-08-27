@@ -7,6 +7,7 @@ interface Favority {
   description?: string;
   avatar_url?: string;
   html_url?: string;
+  isFavorite?: boolean;
 }
 
 interface FavotityContext {

@@ -119,24 +119,6 @@ export const TextButtonAcessLink = styled.Text`
   color: #FFF;
 `;
 
-export const ButtonSavedFavorityOrg = styled.TouchableOpacity`
-  width: 104px;
-  height: 32px;
-  padding: 0px 16px;
-  border-radius: 16px;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  background: #2196f3;
-`;
-
-export const TextButtonSavedFavorityOrg = styled.Text`
-  font-family: 'arimomedium';
-  font-size: 15px;
-  color: #FFF;
-  padding: 0px 4px;
-`;
-
 export const ButtonSaveFavorityOrg = styled.TouchableOpacity`
   width: 104px;
   height: 32px;
@@ -146,12 +128,26 @@ export const ButtonSaveFavorityOrg = styled.TouchableOpacity`
   justify-content: center;
   align-items: center;
   background: rgba(33, 150, 243, 0.1);
+
+  ${props => props.isFavorite && 
+    css`
+      background: #2196f3;
+    `
+  }
 `;
 
 export const TextButtonSaveFavorityOrg = styled.Text`
   font-family: 'arimomedium';
   font-size: 15px;
   color: #2196f3;
+  padding: 0px 4px;
+
+  ${props => props.isFavorite &&
+    css`
+      color: #FFF;
+      padding: 0px 4px;
+    `
+  }
 `;
 
 export const MessageNotFoundOrg = styled.View`
