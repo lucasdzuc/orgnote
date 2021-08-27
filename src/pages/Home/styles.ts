@@ -128,6 +128,12 @@ export const ButtonSaveFavorityOrg = styled.TouchableOpacity`
   justify-content: center;
   align-items: center;
   background: rgba(33, 150, 243, 0.1);
+
+  ${props => props.isFavorite && 
+    css`
+      background: #2196f3;
+    `
+  }
 `;
 
 export const TextButtonSaveFavorityOrg = styled.Text`
@@ -135,6 +141,12 @@ export const TextButtonSaveFavorityOrg = styled.Text`
   font-size: 16px;
   color: #2196f3;
   padding: 0px 4px;
+
+  ${props => props.isFavorite &&
+    css`
+      color: #FFF;
+    `
+  }
 `;
 
 export const FloatingButton = styled.View`

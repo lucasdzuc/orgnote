@@ -1,15 +1,16 @@
 import React, { useState, useEffect, useCallback, useRef } from 'react';
-import { View, Text, FlatList, Image } from 'react-native';
+import { View, Text, FlatList, Image, Alert } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/Feather';
-import { SvgProps } from 'react-native-svg';
+import axios from 'axios';
 
-import api from '../../services/api';
+// import api from '../../services/api';
 
 import useFavorites from '../../hooks/useFavorites';
 
 import DestaqueIcon from '../../assets/icons/destaque.svg';
 import SalvoAzulIcon from '../../assets/icons/salvo_azul.svg';
+import SalvoBrancoIcon from '../../assets/icons/salvo_branco.svg';
 import SetaDireitaBrancoIcon from '../../assets/icons/seta_direita_branco.svg';
 
 import { 
@@ -42,13 +43,7 @@ interface Organizations {
   description: string;
   avatar_url: string;
   html_url: string;
-}
-
-type Props = {
-  // icon: React.FC<SvgProps>;
-  DestaqueIcon: React.FC<SvgProps>;
-  SalvoAzulIcon: React.FC<SvgProps>;
-  SetaDireitaBrancoIcon: React.FC<SvgProps>;
+  isFavorite: boolean;
 }
 
 const Home: React.FC = () => {
@@ -58,14 +53,24 @@ const Home: React.FC = () => {
   const navigation = useNavigation();
 
   const [organizations, setOrganizations] = useState<Organizations[]>([]);
+  const [isFavorite, setIsFavorite] = useState(false);
 
   useEffect(() => {
     async function loadOrganizations(): Promise<void> {
       try {
-        const response = await api.get(`/Microsoft`);
-        setOrganizations([response.data]);
+        const response = await axios.get(`https://api.github.com/orgs/Microsoft`);
+        // console.log(response.data);
+        setOrganizations(
+          [response.data].map((item) => ({
+            ...item,
+            isFavorite: false,
+          }))
+        );
       } catch (error) {
-        console.log(error);
+        if(error){
+          // console.log(error);
+          // Alert.alert("Não foi possível carregar as organização em destaque!");
+        }
       }
     }
     loadOrganizations();
@@ -84,9 +89,15 @@ const Home: React.FC = () => {
     if (favorityExists) {
       removeOrgFavorites(org.id);
     } else {
-      addOrgFavorites([org]);
+      addOrgFavorites(
+        [org].map((item) => ({
+          ...item,
+          isFavorite: true
+        }))
+      );
     }
-  }, [favorites]);
+    setIsFavorite(!isFavorite);
+  }, [isFavorite, favorites]);
 
   return (
     <Container>
@@ -119,9 +130,9 @@ const Home: React.FC = () => {
           </OrgInternContainer>
           
           <AreaButtons>
-            <ButtonSaveFavorityOrg onPress={() => toggleFavorite(org)} testID={`org-${org}`} activeOpacity={0.6}>
-              <SalvoAzulIcon width={20} height={20} />
-              <TextButtonSaveFavorityOrg>Salvar</TextButtonSaveFavorityOrg>
+            <ButtonSaveFavorityOrg onPress={() => toggleFavorite(org)} testID={`org-${org}`} isFavorite={isFavorite} activeOpacity={0.6}>
+              {isFavorite ? <SalvoBrancoIcon width={20} height={20} /> : <SalvoAzulIcon width={20} height={20} /> }
+              <TextButtonSaveFavorityOrg isFavorite={isFavorite}>{isFavorite ? 'Salvo' : 'Salvar'}</TextButtonSaveFavorityOrg>
             </ButtonSaveFavorityOrg>
           </AreaButtons>
         </Org>
