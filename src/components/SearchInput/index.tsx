@@ -8,7 +8,6 @@ import { useNavigation } from '@react-navigation/native';
 import { Container, TextInput, Icon, ButtonGoBack, ButtonClearInput } from './styles';
 
 interface InputProps extends TextInputProps {
-  type?: string;
   name?: string;
 }
 
@@ -18,7 +17,7 @@ const SearchInput: React.FC<InputProps> = ({ value = '', ...rest }) => {
 
   const { goBack } = useNavigation();
 
-  const [displayValue, setDisplayValue] = useState(value);
+  // const [displayValue, setDisplayValue] = useState(value);
   // const debouncedChange = useDebounce(onChangeText, 300);
 
   const [isFocused, setIsFocused] = useState(false);
@@ -62,7 +61,6 @@ const SearchInput: React.FC<InputProps> = ({ value = '', ...rest }) => {
         onFocus={handleInputFocus}
         onBlur={handleInputBlur}
         value={value}
-        // onChangeText={handleChange}
         placeholderTextColor="#969696"
         testID="search-input"
         {...rest}

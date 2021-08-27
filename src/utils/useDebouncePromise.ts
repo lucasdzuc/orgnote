@@ -9,7 +9,7 @@ export default function useDebounce(fn: (arg0: any) => any, delay: number){
   
   const timeoutRef = useRef(null);
   
-  function handler(...params: any[]){
+  function handler(...params: any){
 
     return new Promise((resolve, reject) => {
 
@@ -17,7 +17,7 @@ export default function useDebounce(fn: (arg0: any) => any, delay: number){
         clearTimeout(timeoutRef.current);
       }
 
-      timeoutRef.current = window.setTimeout(async () => {
+      timeoutRef.current = setTimeout(async () => {
         try {
           const response = await fn(...params);
           resolve(response)

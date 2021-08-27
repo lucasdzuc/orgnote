@@ -8,6 +8,7 @@ import api from '../../services/api';
 // IMPORT HOOKS
 import useFavorites from '../../hooks/useFavorites';
 import useDebouncePromise from '../../utils/useDebouncePromise';
+import useDebounceNew from '../../utils/useDebounceNew';
 
 // IMPORT COMPONENTS
 import SearchInput from '../../components/SearchInput';
@@ -57,57 +58,99 @@ const Search: React.FC = () => {
   const [searchValue, setSearchValue] = useState('');
   const [isFavorite, setIsFavorite] = useState(false);
 
-  const debouncedPromise = useDebouncePromise(axios, 300);
+  // const debouncedPromise = useDebouncePromise(axios, 300);
+  const { debounce } = useDebounceNew();
 
-  useEffect(() => {
-    async function loadOrganizations(): Promise<void> {
-      try {
-        if(!searchValue){
-          return;
-        }
-        // if(searchValue.length > 0){
-          const params = {};
-          if(searchValue){
-            params.name_like = searchValue;
-          }
-          const response = await debouncedPromise({
-            method: 'get',
-            baseURL: `https://api.github.com/orgs/${searchValue}`,
-            params
-          });
+  // useEffect(() => {
+  //   async function loadOrganizations(): Promise<void> {
+  //     try {
+  //       if(!searchValue){
+  //         return;
+  //       }
+  //       // if(searchValue.length > 0){
+  //         const params = {};
+  //         if(searchValue){
+  //           params.name_like = searchValue;
+  //         }
+  //         const response = await debouncedPromise({
+  //           method: 'get',
+  //           baseURL: `https://api.github.com/orgs/${searchValue}`,
+  //           params
+  //         });
 
-          const existOrgFavority = favorites.find(f => f.id === response.data.id);
+  //         const existOrgFavority = favorites.find(f => f.id === response.data.id);
 
-          if(existOrgFavority){
-            setOrganizations(
-              [response.data].map((item: Organizations) => ({
-                ...item,
-                isFavorite: true,
-              }))
-            );
-            setIsFavorite(true);
-          } else if (!existOrgFavority) {
-            setOrganizations(
-              [response.data].map((item: Organizations) => ({
-                ...item,
-                isFavorite: false,
-              }))
-            );
-            setIsFavorite(false);
-          }
-        // }
-      } catch (error) {
-        // Alert.alert("Ocorreu um erro!", "Não foi possível consultar a organização!");
-        console.log(error);
+  //         if(existOrgFavority){
+  //           setOrganizations(
+  //             [response.data].map((item: Organizations) => ({
+  //               ...item,
+  //               isFavorite: true,
+  //             }))
+  //           );
+  //           setIsFavorite(true);
+  //         } else if (!existOrgFavority) {
+  //           setOrganizations(
+  //             [response.data].map((item: Organizations) => ({
+  //               ...item,
+  //               isFavorite: false,
+  //             }))
+  //           );
+  //           setIsFavorite(false);
+  //         }
+  //       // }
+  //     } catch (error) {
+  //       // Alert.alert("Ocorreu um erro!", "Não foi possível consultar a organização!");
+  //       console.log(error);
+  //     }
+  //   }
+  //   loadOrganizations();
+  // }, [searchValue, favorites]);
+
+  async function loadOrganizations(org: string): Promise<void> {
+    try {
+      if(!searchValue){
+        return;
       }
+      if(searchValue.length > 0){
+        const response = await api.get(`${org}`);
+
+        const existOrgFavority = favorites.find(f => f.id === response.data.id);
+
+        if(existOrgFavority){
+          setOrganizations(
+            [response.data].map((item: Organizations) => ({
+              ...item,
+              isFavorite: true,
+            }))
+          );
+          setIsFavorite(true);
+        } else if (!existOrgFavority) {
+          setOrganizations(
+            [response.data].map((item: Organizations) => ({
+              ...item,
+              isFavorite: false,
+            }))
+          );
+          setIsFavorite(false);
+        }
+      } else {
+        setOrganizations([]);
+      }
+    } catch (error) {
+      // Alert.alert("Ocorreu um erro!", "Não foi possível consultar a organização!");
+      // eslint-disable-next-line no-console
+      console.log(error);
     }
-    loadOrganizations();
-  }, [searchValue, favorites]);
+  }
+
+  function handleChange(value: string) {
+    setSearchValue(value);
+    debounce(function () {
+      loadOrganizations(value);
+  }, 300)}
 
   const toggleFavorite = useCallback((org) => {
-
     const favorityExists = favorites.find(p => p.id === org.id);
-
     if (favorityExists) {
       removeOrgFavorites(org.id);
     } else {
@@ -127,7 +170,7 @@ const Search: React.FC = () => {
       <ContentInputSearch>
         <SearchInput
           value={searchValue}
-          onChangeText={(text: string) => setSearchValue(text)}
+          onChangeText={(text) => handleChange(text)}
           placeholder="Procurar organizações..."
         />
       </ContentInputSearch>
