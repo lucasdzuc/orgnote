@@ -51,8 +51,6 @@ const Search: React.FC = () => {
 
   const { addOrgFavorites, removeOrgFavorites, favorites } = useFavorites();
 
-  // const { goBack } = useNavigation();
-
   const [organizations, setOrganizations] = useState<Organizations[]>([]);
   const [searchValue, setSearchValue] = useState('');
   const [isFavorite, setIsFavorite] = useState(false);
@@ -69,9 +67,8 @@ const Search: React.FC = () => {
           //   params.name_like = searchValue;
           // }
           const response = await api.get(`${searchValue}`);
-          // console.log(response.data);
-          // setOrganizations([response.data]);
-          const existOrgFavority = await favorites.find(f => f.id === response.data.id );
+
+          const existOrgFavority = await favorites.find(f => f.id === response.data.id);
 
           if(existOrgFavority){
             setOrganizations(
@@ -90,7 +87,8 @@ const Search: React.FC = () => {
             );
             setIsFavorite(false);
           }
-
+        } else if (searchValue.length === 0) {
+          setOrganizations([]);
         }
       } catch (error) {
         // Alert.alert("Ocorreu um erro!", "Não foi possível consultar a organização!");
@@ -123,7 +121,7 @@ const Search: React.FC = () => {
       <ContentInputSearch>
         <SearchInput
           value={searchValue}
-          onChangeText={setSearchValue}
+          onChangeText={(text: string) => setSearchValue(text)}
           placeholder="Procurar organizações..."
         />
       </ContentInputSearch>
