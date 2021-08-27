@@ -87,6 +87,8 @@ const Search: React.FC = () => {
             );
             setIsFavorite(false);
           }
+        } else if (searchValue.length === 0) {
+          setOrganizations([]);
         }
       } catch (error) {
         // Alert.alert("Ocorreu um erro!", "Não foi possível consultar a organização!");
