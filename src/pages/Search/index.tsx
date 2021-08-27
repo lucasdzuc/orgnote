@@ -7,7 +7,7 @@ import api from '../../services/api';
 
 // IMPORT HOOKS
 import useFavorites from '../../hooks/useFavorites';
-import useDebouncePromise from '../../utils/useDebouncePromise';
+// import useDebouncePromise from '../../utils/useDebouncePromise';
 import useDebounceNew from '../../utils/useDebounceNew';
 
 // IMPORT COMPONENTS
