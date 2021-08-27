@@ -25,9 +25,7 @@ const SearchInput: React.FC<InputProps> = ({ value = '', ...rest }) => {
   }, [value]);
 
   const handleClearInput = useCallback(() => {
-
     inputRef.current.clear();
-
   }, [inputRef]);
 
   return (

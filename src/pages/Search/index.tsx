@@ -1,11 +1,13 @@
 import React, { useState, useEffect, useCallback, useRef } from 'react';
 import { View, Text, ScrollView, Image, Alert } from 'react-native';
+import axios from 'axios';
 
 // IMPORT API SERVER
 import api from '../../services/api';
 
 // IMPORT HOOKS
 import useFavorites from '../../hooks/useFavorites';
+import useDebouncePromise from '../../utils/useDebouncePromise';
 
 // IMPORT COMPONENTS
 import SearchInput from '../../components/SearchInput';
@@ -55,20 +57,26 @@ const Search: React.FC = () => {
   const [searchValue, setSearchValue] = useState('');
   const [isFavorite, setIsFavorite] = useState(false);
 
+  const debouncedPromise = useDebouncePromise(axios, 300);
+
   useEffect(() => {
     async function loadOrganizations(): Promise<void> {
       try {
         if(!searchValue){
           return;
         }
-        if(searchValue.length > 0){
-          // const params = {};
-          // if(searchValue){
-          //   params.name_like = searchValue;
-          // }
-          const response = await api.get(`${searchValue}`);
+        // if(searchValue.length > 0){
+          const params = {};
+          if(searchValue){
+            params.name_like = searchValue;
+          }
+          const response = await debouncedPromise({
+            method: 'get',
+            baseURL: `https://api.github.com/orgs/${searchValue}`,
+            params
+          });
 
-          const existOrgFavority = await favorites.find(f => f.id === response.data.id);
+          const existOrgFavority = favorites.find(f => f.id === response.data.id);
 
           if(existOrgFavority){
             setOrganizations(
@@ -87,9 +95,7 @@ const Search: React.FC = () => {
             );
             setIsFavorite(false);
           }
-        } else if (searchValue.length === 0) {
-          setOrganizations([]);
-        }
+        // }
       } catch (error) {
         // Alert.alert("Ocorreu um erro!", "Não foi possível consultar a organização!");
         console.log(error);
