@@ -4,7 +4,7 @@ import { getStatusBarHeight } from 'react-native-iphone-x-helper';
 
 export const Container = styled.View`
   flex: 1;
-  background: #fafafa;
+  background: ${props => props.theme.colors.background};
   padding-top: ${Platform.OS === 'ios' ? getStatusBarHeight() + 24 : 64}px;
 `;
 
@@ -18,7 +18,7 @@ export const ContentInput = styled.View`
   width: 100%;
   height: 60px;
   /* padding: 0px 16px; */
-  background: #FFF;
+  background: ${props => props.theme.colors.searchinput};
   border-radius: 14px;
   /* margin-bottom: 8px; */
   /* border-width: 2px; */
@@ -42,7 +42,7 @@ export const TextInput = styled.TextInput`
   flex: 1;
   font-family: 'arimoregular';
   font-size: 16px;
-  color: #000;
+  color: ${props => props.theme.colors.searchtextvalue};
 `;
 
 export const ButtonSearch = styled.TouchableOpacity``;
@@ -60,7 +60,7 @@ export const Org = styled.View`
   padding: 14px;
   flex-direction: column;
   /* align-items: center; */
-  background: #FFF;
+  background: ${props => props.theme.colors.card};
   border-radius: 14px;
   margin-bottom: 16px;
 
@@ -93,14 +93,14 @@ export const OrgContent = styled.View`
 export const OrgTitle = styled.Text`
   font-family: 'arimomedium';
   font-size: 16px;
-  color: #2196f3;
+  color: ${props => props.theme.colors.cardname};
   font-weight: 700;
 `;
 
 export const OrgDescription = styled.Text`
   font-family: 'arimoregular';
   font-size: 16px;
-  color: #636363;
+  color: ${props => props.theme.colors.carddescription};
 `;
 
 export const AreaButtons = styled.View`
@@ -158,7 +158,7 @@ export const InfoMessageScreen = styled.View`
 export const TextInfoMessageScreen = styled.Text`
   font-family: 'arimoregular';
   font-size: 17px;
-  color: #000;
+  color: ${props => props.theme.colors.emptytext};
   text-align: center;
   padding: 24px 0px;
 `;

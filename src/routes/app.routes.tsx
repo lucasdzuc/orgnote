@@ -1,8 +1,9 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, useContext } from 'react';
 import { View, TouchableOpacity, Alert } from 'react-native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { NavigationContainer } from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/Feather';
+import { ThemeContext } from 'styled-components';
 
 // IMPORT HOOK
 import useFavorites from '../hooks/useFavorites';
@@ -13,11 +14,18 @@ import Home from '../pages/Home';
 import Search from '../pages/Search';
 import Favorites from '../pages/Favorites';
 
-// import Home from '../pages/Home';
+// IMPORT COMPONENTS
+import Header from '../components/Header';
 
 const App = createStackNavigator();
 
-const AppRoutes: React.FC = () => {
+interface PropsTheme {
+  toggleTheme(): void;
+}
+
+const AppRoutes: React.FC<PropsTheme> = ({ toggleTheme }) => {
+
+  const { title, colors } = useContext(ThemeContext);
   
   const { clearFavorites, favorites } = useFavorites();
   
@@ -43,14 +51,22 @@ const AppRoutes: React.FC = () => {
 
   return (
     <NavigationContainer>
-      <App.Navigator initialRouteName="Home">
+      <App.Navigator
+        initialRouteName="Home"
+        screenOptions={{
+          headerShown: true,
+          cardStyle: { 
+            backgroundColor: title === 'light' ? '#FAFAFA' : '#000', 
+          },
+        }}
+      >
         <App.Screen
-          options={{
-            cardStyle: { backgroundColor: '#fafafa' },
-            headerShown: false,
-          }}
           name="Home"
           component={Home}
+          options={{
+            headerShown: true,
+            header: () => <Header toggleTheme={toggleTheme} />,
+          }}
         />
 
         <App.Screen
@@ -70,7 +86,7 @@ const AppRoutes: React.FC = () => {
               <Icon
                 name="arrow-left"
                 size={24}
-                color="#000"
+                color={title === 'light' ? '#000' : '#FAFAFA'}
                 onPress={() => navigation.goBack()}
                 style={{ paddingHorizontal: 24 }}
               />
@@ -93,10 +109,10 @@ const AppRoutes: React.FC = () => {
             headerTitleStyle: {
               fontFamily: 'arimoregular',
               fontSize: 16,
-              color: '#000',
+              color: title === 'light' ? '#000' : '#FAFAFA' ,
             },
             headerStyle: {
-              backgroundColor: '#fafafa',
+              backgroundColor: title === 'light' ? '#FAFAFA' : '#000',
               elevation: 0,
               borderWidth: 0,
               shadowColor: 'transparent',

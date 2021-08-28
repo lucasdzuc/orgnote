@@ -10,10 +10,10 @@ export const Container = styled.View<ContainerProps>`
   width: 100%;
   height: 60px;
   padding: 0px 0px 0px 0px;
-  background: #FFF;
+  background: ${props => props.theme.colors.searchinput};
   border-radius: 14px;
   border-width: 2px;
-  border-color: #FFF;
+  border-color: ${props => props.theme.colors.searchinput};
   flex-direction: row;
   align-items: center;
 
@@ -36,7 +36,7 @@ export const TextInput = styled.TextInput`
   flex: 1;
   font-family: 'arimoregular';
   font-size: 16px;
-  color: #000;
+  color: ${props => props.theme.colors.searchtextvalue};
 `;
 
 export const ButtonClearInput = styled.TouchableOpacity``;

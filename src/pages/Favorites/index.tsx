@@ -26,7 +26,7 @@ import {
   OrgAvatarContainer,
   OrgAvatarImage,
   OrgContent,
-  OrgTitle,
+  OrgName,
   OrgDescription,
   AreaButtons,
   ButtonAcessLink,
@@ -41,7 +41,7 @@ import {
 
 interface OrganizationsFavorites {
   id: number;
-  name?: string;
+  name: string;
   description?: string;
   avatar_url?: string;
   html_url?: string;
@@ -60,8 +60,8 @@ const Favorites: React.FC = () => {
   }, []);
 
   const filterFavorites = useMemo(() => {
-    // const lowerSearch = searchFavority?.toLowerCase(searchFavority);
-    return favorites.filter(({ name }) => name?.includes(searchFavority));
+    const lowerSearch = searchFavority.toLowerCase(searchFavority);
+    return favorites.filter(({ name }) => name?.toLowerCase().includes(lowerSearch));
   }, [searchFavority, favorites]);
 
   const toggleFavorite = useCallback((org) => {
@@ -107,7 +107,7 @@ const Favorites: React.FC = () => {
                   </OrgAvatarContainer>
 
                   <OrgContent>
-                    <OrgTitle>{item.name}</OrgTitle>
+                    <OrgName>{item.name}</OrgName>
                     <OrgDescription>{item.description}</OrgDescription>
                   </OrgContent>
                 </OrgInternContainer>

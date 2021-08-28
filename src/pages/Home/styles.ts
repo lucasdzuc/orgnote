@@ -1,11 +1,11 @@
 import styled, { css } from 'styled-components/native';
-import { Platform, FlatList } from 'react-native';
+import { Platform } from 'react-native';
 import { getStatusBarHeight } from 'react-native-iphone-x-helper';
 
 export const Container = styled.View`
   flex: 1;
-  background: #fafafa;
-  padding-top: ${Platform.OS === 'ios' ? getStatusBarHeight() + 24 : 64}px;
+  padding-top: ${Platform.OS === 'ios' ? getStatusBarHeight() + 24 : 24}px;
+  background: ${props => props.theme.colors.background};
 `;
 
 export const ContentInputSearch = styled.View`
@@ -19,7 +19,7 @@ export const ButtonRedirectPageSearch = styled.TouchableOpacity`
   height: 60px;
   padding: 0px 24px;
   border-radius: 14px;
-  background: #FFF;
+  background: ${props => props.theme.colors.searchinput};
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
@@ -36,7 +36,7 @@ export const ButtonRedirectPageSearch = styled.TouchableOpacity`
 export const TextButtonPageSearch = styled.Text`
   font-family: 'arimoregular';
   font-size: 16px;
-  color: #969696;
+  color: ${props => props.theme.colors.searchplaceholder};
 `;
 
 export const HeaderHighlighted = styled.View`
@@ -50,13 +50,13 @@ export const TextHeader = styled.Text`
   font-family: 'arimomedium';
   font-size: 22px;
   font-weight: 500;
-  color: #000;
+  color: ${props => props.theme.colors.text};
 `;
 
 export const SubTextHeader = styled.Text`
   font-family: 'arimoregular';
   font-size: 16px;
-  color: #636363;
+  color: ${props => props.theme.colors.subtext};
 `;
 
 export const OrgContainer = styled.View`
@@ -72,7 +72,7 @@ export const Org = styled.View`
   padding: 14px;
   flex-direction: column;
   /* align-items: center; */
-  background: #FFF;
+  background: ${props => props.theme.colors.card};
   border-radius: 14px;
   margin-bottom: 16px;
 
@@ -102,17 +102,17 @@ export const OrgContent = styled.View`
   /* background: lightgreen; */
 `;
 
-export const OrgTitle = styled.Text`
+export const OrgName = styled.Text`
   font-family: 'arimoregular';
   font-size: 16px;
-  color: #2196f3;
+  color: ${props => props.theme.colors.cardname};
   font-weight: 700;
 `;
 
 export const OrgDescription = styled.Text`
   font-family: 'arimoregular';
   font-size: 16px;
-  color: #636363;
+  color: ${props => props.theme.colors.carddescription};
 `;
 
 export const AreaButtons = styled.View`

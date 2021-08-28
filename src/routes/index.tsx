@@ -2,8 +2,12 @@ import React from 'react';
 
 import AppRoutes from './app.routes';
 
-const Routes: React.FC = () => {
-  return <AppRoutes />;
+interface PropsTheme {
+  toggleTheme(): void;
+}
+
+const Routes: React.FC<PropsTheme> = ({ toggleTheme }) => {
+  return <AppRoutes toggleTheme={toggleTheme} />;
 };
 
 export default Routes;

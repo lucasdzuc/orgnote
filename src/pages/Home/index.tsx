@@ -27,7 +27,7 @@ import {
   OrgAvatarContainer,
   OrgAvatarImage,
   OrgContent,
-  OrgTitle,
+  OrgName,
   OrgDescription,
   AreaButtons,
   ButtonSaveFavorityOrg,
@@ -128,7 +128,7 @@ const Home: React.FC = () => {
             </OrgAvatarContainer>
 
             <OrgContent>
-              <OrgTitle>{org.name}</OrgTitle>
+              <OrgName>{org.name}</OrgName>
               <OrgDescription>{org.description}</OrgDescription>
             </OrgContent>
           </OrgInternContainer>

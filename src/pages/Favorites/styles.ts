@@ -4,21 +4,21 @@ import { getStatusBarHeight } from 'react-native-iphone-x-helper';
 
 export const Container = styled.View`
   flex: 1;
-  background: #fafafa;
+  background: ${props => props.theme.colors.background};
   /* padding-top: ${Platform.OS === 'ios' ? getStatusBarHeight() + 24 : 64}px; */
 `;
 
 export const HeaderContainer = styled.View`
   margin-bottom: 8px;
   padding: 16px 16px 0px;
-  background: #fafafa;
+  background: ${props => props.theme.colors.background};;
 `;
 
 export const ProductList = styled(FlatList)``;
 
 export const HeaderContainerList = styled.View`
   margin-bottom: 16px;
-  background: #fafafa;
+  background: ${props => props.theme.colors.background};
 `;
 
 export const Info = styled.View`
@@ -49,7 +49,7 @@ export const Org = styled.View`
   padding: 14px;
   flex-direction: column;
   /* align-items: center; */
-  background: #FFF;
+  background: ${props => props.theme.colors.card};
   border-radius: 14px;
   margin-bottom: 10px;
 
@@ -81,7 +81,7 @@ export const OrgContent = styled.View`
   /* background: lightgreen; */
 `;
 
-export const OrgTitle = styled.Text`
+export const OrgName = styled.Text`
   font-family: 'arimomedium';
   font-size: 16px;
   color: #2196f3;
@@ -91,7 +91,7 @@ export const OrgTitle = styled.Text`
 export const OrgDescription = styled.Text`
   font-family: 'arimoregular';
   font-size: 16px;
-  color: #636363;
+  color: ${props => props.theme.colors.carddescription};
 `;
 
 export const AreaButtons = styled.View`
