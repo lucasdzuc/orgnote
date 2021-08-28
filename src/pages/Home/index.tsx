@@ -60,15 +60,19 @@ const Home: React.FC = () => {
       try {
         const response = await axios.get(`https://api.github.com/orgs/Microsoft`);
         // console.log(response.data);
+        const equalsOrg = favorites.find(org => org.id === response.data.id);
+
         setOrganizations(
           [response.data].map((item) => ({
             ...item,
-            isFavorite: false,
+            isFavorite: equalsOrg ? true : false,
           }))
         );
+        setIsFavorite(equalsOrg ? true : false);
       } catch (error) {
         if(error){
-          // console.log(error);
+          setOrganizations([]);
+          console.log(error);
           // Alert.alert("Não foi possível carregar as organização em destaque!");
         }
       }

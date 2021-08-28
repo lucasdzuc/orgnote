@@ -18,6 +18,9 @@ import SalvoAzulIcon from '../../assets/icons/salvo_azul.svg';
 import SalvoBrancoIcon from '../../assets/icons/salvo_branco.svg';
 import EmojiTristeIcon from '../../assets/icons/emoji_triste.svg';
 
+// IMPORT IMAGES
+import ImageInfoSearch from '../../assets/images/info-search.svg';
+
 // IMPORT STYLES OF SCREEN
 import {
   Container,
@@ -39,6 +42,9 @@ import {
   TextButtonSaveFavorityOrg,
   MessageOrgNameNotExist,
   TextMessageOrgNameNotExist,
+  InfoMessageScreen,
+  TextInfoMessageScreen,
+  TextPlus
 } from './styles';
 
 interface Organizations {
@@ -77,9 +83,7 @@ const Search: React.FC = () => {
   //           baseURL: `https://api.github.com/orgs/${searchValue}`,
   //           params
   //         });
-
   //         const existOrgFavority = favorites.find(f => f.id === response.data.id);
-
   //         if(existOrgFavority){
   //           setOrganizations(
   //             [response.data].map((item: Organizations) => ({
@@ -112,34 +116,26 @@ const Search: React.FC = () => {
         return;
       }
       if(searchValue.length > 0){
+
         const response = await api.get(`${org}`);
 
         const existOrgFavority = favorites.find(f => f.id === response.data.id);
 
-        if(existOrgFavority){
-          setOrganizations(
-            [response.data].map((item: Organizations) => ({
-              ...item,
-              isFavorite: true,
-            }))
-          );
-          setIsFavorite(true);
-        } else if (!existOrgFavority) {
-          setOrganizations(
-            [response.data].map((item: Organizations) => ({
-              ...item,
-              isFavorite: false,
-            }))
-          );
-          setIsFavorite(false);
-        }
-      } else {
-        setOrganizations([]);
+        setOrganizations(
+          [response.data].map((item: Organizations) => ({
+            ...item,
+            isFavorite: existOrgFavority ? true : false,
+          }))
+        );
+        
+        setIsFavorite(existOrgFavority ? true : false);
+        
       }
     } catch (error) {
+      setOrganizations([]);
+      console.log(error);
       // Alert.alert("Ocorreu um erro!", "Não foi possível consultar a organização!");
       // eslint-disable-next-line no-console
-      console.log(error);
     }
   }
 
@@ -199,12 +195,23 @@ const Search: React.FC = () => {
               </Org>
             ))
           ) : (
-            searchValue.length > 0 && organizations.length === 0 && (
-              <MessageOrgNameNotExist>
-                <EmojiTristeIcon width={20} height={20} />
-                <TextMessageOrgNameNotExist>Não encontramos organizações com este nome!</TextMessageOrgNameNotExist>
-              </MessageOrgNameNotExist>
-            ) 
+            <>
+              {searchValue.length > 0 && organizations.length === 0 && (
+                <MessageOrgNameNotExist>
+                  <EmojiTristeIcon width={20} height={20} />
+                  <TextMessageOrgNameNotExist>Não encontramos organizações com este nome!</TextMessageOrgNameNotExist>
+                </MessageOrgNameNotExist>
+              )}
+              {searchValue.length === 0 && organizations.length === 0 && (
+                <InfoMessageScreen>
+                  <ImageInfoSearch width={200} height={200} />
+                  <TextInfoMessageScreen>
+                    Pesquise por organizações no <TextPlus>GitHub</TextPlus>{'\n'}
+                    e salve nos seus favoritos!
+                  </TextInfoMessageScreen>
+                </InfoMessageScreen>
+              )}
+            </>
           )}
         </OrgContainer>
       </ScrollView>

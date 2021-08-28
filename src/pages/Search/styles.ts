@@ -6,7 +6,6 @@ export const Container = styled.View`
   flex: 1;
   background: #fafafa;
   padding-top: ${Platform.OS === 'ios' ? getStatusBarHeight() + 24 : 64}px;
-
 `;
 
 export const ContentInputSearch = styled.View`
@@ -117,7 +116,7 @@ export const ButtonSaveFavorityOrg = styled.TouchableOpacity`
   align-items: center;
   background: rgba(33, 150, 243, 0.1);
 
-  ${props => props.isFavorite && 
+  ${(props: { isFavorite: boolean; }) => props.isFavorite && 
     css`
       background: #2196f3;
     `
@@ -130,7 +129,7 @@ export const TextButtonSaveFavorityOrg = styled.Text`
   color: #2196f3;
   padding: 0px 4px;
 
-  ${props => props.isFavorite &&
+  ${(props: { isFavorite: boolean; }) => props.isFavorite &&
     css`
       color: #FFF;
     `
@@ -146,5 +145,28 @@ export const TextMessageOrgNameNotExist = styled.Text`
   font-family: 'arimoregular';
   font-size: 16px;
   color: #969696;
+  text-align: center;
+`;
+
+export const InfoMessageScreen = styled.View`
+  flex: 1;
+  margin-top: 80px;
+  justify-content: center;
+  align-items: center;
+`;
+
+export const TextInfoMessageScreen = styled.Text`
+  font-family: 'arimoregular';
+  font-size: 17px;
+  color: #000;
+  text-align: center;
+  padding: 24px 0px;
+`;
+
+export const TextPlus = styled.Text`
+  font-family: 'arimoregular';
+  font-size: 17px;
+  color: #2196f3;
+  font-weight: 700;
   text-align: center;
 `;
