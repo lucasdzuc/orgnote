@@ -78,7 +78,7 @@ const Home: React.FC = () => {
       }
     }
     loadOrganizations();
-  }, []);
+  }, [favorites]);
 
   const handleNavigateSearch = useCallback(() => {
     navigation.navigate('Search');
