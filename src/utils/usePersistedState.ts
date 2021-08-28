@@ -6,7 +6,7 @@ type Response<T> = [
   Dispatch<SetStateAction<T>>,
 ];
 
-function usePersistedState<T>(key: string, initialState: any): Response<T> {
+function usePersistedState<T>(key: string, initialState: T): Response<T> {
   const [state, setState] = useState(async () => {
     const storageValue = await AsyncStorage.getItem(key);
 
@@ -17,8 +17,8 @@ function usePersistedState<T>(key: string, initialState: any): Response<T> {
     }
   });
 
-  useEffect(() => {
-    AsyncStorage.setItem(key, JSON.stringify(state));
+  useEffect(async () => {
+    await AsyncStorage.setItem(key, JSON.stringify(state));
   }, [key, state]);
 
   return [state, setState];

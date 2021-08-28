@@ -19,11 +19,11 @@ const AppMobile: React.FC = () => {
 
   const { loading } = useFavorites();
 
-  const [theme, setTheme] = usePersistedState<DefaultTheme>('theme', light);
+  const [theme, setTheme] = useState(light);
 
   const toggleTheme = useCallback(() => {
-    setTheme(theme === 'light' ? dark : light);
-  }, [theme]);
+    setTheme(theme.title === 'light' ? dark : light);
+  }, [theme.title]);
 
   const [fontsLoaded] = useFonts({
     'arimoregular': require('./assets/fonts/Arimo-Regular.ttf'),
@@ -41,10 +41,10 @@ const AppMobile: React.FC = () => {
   };
 
   return (
-    <View style={{ flex: 1, backgroundColor: theme === 'light' ? "#FAFAFA" : "#000000" }}>
+    <View style={{ flex: 1, backgroundColor: theme.title === 'light' ? "#FAFAFA" : "#000000" }}>
       <FavoritesProvider>
         <ThemeProvider theme={theme}>
-          <StatusBar barStyle={theme === 'light' ? "dark-content" : "light-content"} backgroundColor="transparent" translucent />
+          <StatusBar barStyle={theme.title === 'light' ? "dark-content" : "light-content"} backgroundColor="transparent" translucent />
           <Routes toggleTheme={toggleTheme} />
         </ThemeProvider>
       </FavoritesProvider>
