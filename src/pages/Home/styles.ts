@@ -2,6 +2,11 @@ import styled, { css } from 'styled-components/native';
 import { Platform } from 'react-native';
 import { getStatusBarHeight } from 'react-native-iphone-x-helper';
 
+import DestaqueIcon from '../../assets/icons/destaque.svg';
+import SalvoAzulIcon from '../../assets/icons/salvo_azul.svg';
+import SalvoBrancoIcon from '../../assets/icons/salvo_branco.svg';
+import SetaDireitaBrancoIcon from '../../assets/icons/seta_direita_branco.svg';
+
 export const Container = styled.View`
   flex: 1;
   padding-top: ${Platform.OS === 'ios' ? getStatusBarHeight() + 24 : 24}px;
@@ -44,6 +49,11 @@ export const HeaderHighlighted = styled.View`
   padding: 66px 0px 32px;
   justify-content: center;
   align-items: center;
+`;
+
+export const IconDestaque = styled(DestaqueIcon)`
+  width: 24px;
+  height: 24px;
 `;
 
 export const TextHeader = styled.Text`
@@ -136,6 +146,16 @@ export const ButtonSaveFavorityOrg = styled.TouchableOpacity`
   }
 `;
 
+export const IconSalvoBranco = styled(SalvoBrancoIcon)`
+  width: 20px;
+  height: 20px;
+`;
+
+export const IconSalvoAzul = styled(SalvoAzulIcon)`
+  width: 20px;
+  height: 20px;
+`;
+
 export const TextButtonSaveFavorityOrg = styled.Text`
   font-family: 'arimomedium';
   font-size: 16px;
@@ -152,9 +172,25 @@ export const TextButtonSaveFavorityOrg = styled.Text`
 export const FloatingButton = styled.View`
   /* flex: 1; */
   position: absolute;
+  /* width: 100%; */
+  /* padding: 0px 16px; */
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
   bottom: 32px;
   right: 16px;
 `;
+
+export const ButtonTheme = styled.TouchableOpacity`
+  width: 48px;
+  height: 48px;
+
+  border-radius: 50px;
+  background: ${props => props.theme.colors.secondary};
+  justify-content: center;
+  align-items: center;
+`;
+
 
 export const ButtonNavigateFavority = styled.TouchableOpacity`
   /* flex: 1; */
@@ -177,3 +213,7 @@ export const TextButtonNavigate = styled.Text`
   padding: 0px 8px;
 `;
 
+export const IconSetaDireitaBranco = styled(SetaDireitaBrancoIcon)`
+  width: 20px;
+  height: 20px;
+`;

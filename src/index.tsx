@@ -6,19 +6,20 @@ import { useFonts } from 'expo-font';
 import AppLoading from 'expo-app-loading'
 import usePersistedState from './utils/usePersistedState';
 
+import light from './styles/themes/light';
+import dark from './styles/themes/dark';
+
 import Routes from './routes';
 
 import { FavoritesProvider } from './contexts/favorites';
 
 import useFavorites from './hooks/useFavorites';
 
-import light from './styles/themes/light';
-import dark from './styles/themes/dark';
-
 const AppMobile: React.FC = () => {
 
   const { loading } = useFavorites();
 
+  // const [theme, setTheme] = usePersistedState<DefaultTheme>('theme', light);
   const [theme, setTheme] = useState(light);
 
   const toggleTheme = useCallback(() => {
@@ -41,14 +42,14 @@ const AppMobile: React.FC = () => {
   };
 
   return (
-    <View style={{ flex: 1, backgroundColor: theme.title === 'light' ? "#FAFAFA" : "#000000" }}>
-      <FavoritesProvider>
-        <ThemeProvider theme={theme}>
+    <ThemeProvider theme={theme}>
+      <View style={{ flex: 1, backgroundColor: theme.title === 'light' ? "#FAFAFA" : "#000000" }}>
+        <FavoritesProvider>
           <StatusBar barStyle={theme.title === 'light' ? "dark-content" : "light-content"} backgroundColor="transparent" translucent />
           <Routes toggleTheme={toggleTheme} />
-        </ThemeProvider>
-      </FavoritesProvider>
-    </View>
+        </FavoritesProvider>
+      </View>
+    </ThemeProvider>
   );
 };
 

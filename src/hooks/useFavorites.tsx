@@ -2,7 +2,24 @@ import { useContext } from 'react';
 
 import FavoritesContext from '../contexts/favorites';
 
-function useFavorites() {
+interface Favority {
+  id: number;
+  name: string;
+  description?: string;
+  avatar_url?: string;
+  html_url?: string;
+  isFavorite?: boolean;
+}
+
+interface FavotityContext {
+  favorites: Favority[];
+  loading: boolean;
+  addOrgFavorites(item: Favority): void;
+  removeOrgFavorites(id: string): void;
+  clearFavorites(): void;
+}
+
+function useFavorites(): FavotityContext {
 
     const context = useContext(FavoritesContext);
   

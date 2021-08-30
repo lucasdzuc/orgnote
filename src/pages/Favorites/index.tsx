@@ -50,7 +50,7 @@ interface OrganizationsFavorites {
 
 const Favorites: React.FC = () => {
 
-  const { favorites, addOrgFavorites, removeOrgFavorites } = useFavorites();
+  const { favorites, removeOrgFavorites } = useFavorites();
 
   const [searchFavority, setSearchFavority] = useState('');
   const [isFavorite, setIsFavorite] = useState(false);
@@ -68,9 +68,10 @@ const Favorites: React.FC = () => {
     const favorityExists = favorites.find(p => p.id === org.id);
     if (favorityExists) {
       removeOrgFavorites(org.id);
-    } else {
-      addOrgFavorites([org]);
-    }
+    } 
+    // else {
+    //   addOrgFavorites([org]);
+    // }
     setIsFavorite(!isFavorite);
   }, [isFavorite, favorites]);
 

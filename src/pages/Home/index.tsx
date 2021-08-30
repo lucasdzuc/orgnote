@@ -1,17 +1,13 @@
-import React, { useState, useEffect, useCallback, useRef } from 'react';
+import React, { useState, useEffect, useCallback, useRef, useContext } from 'react';
 import { View, Text, FlatList, Image, Alert } from 'react-native';
+import { ThemeContext } from 'styled-components';
 import { useNavigation } from '@react-navigation/native';
-import Icon from 'react-native-vector-icons/Feather';
 import axios from 'axios';
+import Icon from 'react-native-vector-icons/Feather';
 
 // import api from '../../services/api';
 
 import useFavorites from '../../hooks/useFavorites';
-
-import DestaqueIcon from '../../assets/icons/destaque.svg';
-import SalvoAzulIcon from '../../assets/icons/salvo_azul.svg';
-import SalvoBrancoIcon from '../../assets/icons/salvo_branco.svg';
-import SetaDireitaBrancoIcon from '../../assets/icons/seta_direita_branco.svg';
 
 import { 
   Container,
@@ -19,6 +15,7 @@ import {
   ButtonRedirectPageSearch,
   TextButtonPageSearch,
   HeaderHighlighted,
+  IconDestaque,
   TextHeader,
   SubTextHeader,
   OrgContainer,
@@ -31,10 +28,14 @@ import {
   OrgDescription,
   AreaButtons,
   ButtonSaveFavorityOrg,
+  IconSalvoBranco,
+  IconSalvoAzul,
   TextButtonSaveFavorityOrg,
   FloatingButton,
+  ButtonTheme,
   ButtonNavigateFavority,
   TextButtonNavigate,
+  IconSetaDireitaBranco,
 } from './styles';
 
 interface Organizations {
@@ -46,7 +47,13 @@ interface Organizations {
   isFavorite: boolean;
 }
 
-const Home: React.FC = () => {
+interface PropsTheme {
+  toggleTheme(): void;
+}
+
+const Home: React.FC<PropsTheme> = ({ toggleTheme }) => {
+
+  const { colors, title } = useContext(ThemeContext);
 
   const { addOrgFavorites, removeOrgFavorites, favorites } = useFavorites();
 
@@ -93,11 +100,14 @@ const Home: React.FC = () => {
     if (favorityExists) {
       removeOrgFavorites(org.id);
     } else {
-      addOrgFavorites(
-        [org].map((item) => ({
-          ...item,
-          isFavorite: true
-        }))
+      addOrgFavorites({
+        ...org,
+        isFavorite: true
+      }
+        // [org].map((item) => ({
+        //   ...item,
+        //   isFavorite: true
+        // }))
       );
     }
     setIsFavorite(!isFavorite);
@@ -114,7 +124,7 @@ const Home: React.FC = () => {
       </ContentInputSearch>
 
       <HeaderHighlighted>
-        <DestaqueIcon width={24} height={24} />
+        <IconDestaque />
         <TextHeader>Organizações em destaque</TextHeader>
         <SubTextHeader>Veja as organizações em têndencia no GitHub.</SubTextHeader>
       </HeaderHighlighted>
@@ -135,7 +145,7 @@ const Home: React.FC = () => {
           
           <AreaButtons>
             <ButtonSaveFavorityOrg onPress={() => toggleFavorite(org)} testID={`org-${org}`} isFavorite={isFavorite} activeOpacity={0.6}>
-              {isFavorite ? <SalvoBrancoIcon width={20} height={20} /> : <SalvoAzulIcon width={20} height={20} /> }
+              {isFavorite ? <IconSalvoBranco /> : <IconSalvoAzul /> }
               <TextButtonSaveFavorityOrg isFavorite={isFavorite}>{isFavorite ? 'Salvo' : 'Salvar'}</TextButtonSaveFavorityOrg>
             </ButtonSaveFavorityOrg>
           </AreaButtons>
@@ -144,9 +154,13 @@ const Home: React.FC = () => {
       </OrgContainer>
 
       <FloatingButton>
+        {/* <ButtonTheme onPress={toggleTheme} activeOpacity={0.7}>
+          <Icon name={title === 'light' ? 'moon' : 'sun'} size={24} color={title === 'light' ? "#000" : "#2196f3" } />
+        </ButtonTheme> */}
+
         <ButtonNavigateFavority onPress={handleNavigateFavorities} activeOpacity={0.7}>
           <TextButtonNavigate>Ver salvos</TextButtonNavigate>
-          <SetaDireitaBrancoIcon width={20} height={20} />
+          <IconSetaDireitaBranco />
         </ButtonNavigateFavority>
       </FloatingButton>
 

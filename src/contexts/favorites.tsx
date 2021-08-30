@@ -1,4 +1,4 @@
-import React, { createContext, useState, useCallback, useEffect } from 'react';
+import React, { createContext, useState, useEffect, useCallback, useMemo } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 interface Favority {
@@ -13,7 +13,7 @@ interface Favority {
 interface FavotityContext {
   favorites: Favority[];
   loading: boolean;
-  addOrgFavorites(item: Favority[]): void;
+  addOrgFavorites(item: Favority): void;
   removeOrgFavorites(id: string): void;
   clearFavorites(): void;
 }
@@ -29,7 +29,8 @@ export const FavoritesProvider: React.FC = ({ children }) => {
     try {
       setLoading(true);
       const storagedFavorites = await AsyncStorage.getItem('@OrgNote:favorites');
-  
+      // console.log(JSON.parse(storagedFavorites));
+
       if (storagedFavorites) {
         setFavorites(JSON.parse(storagedFavorites));
       }
@@ -43,35 +44,29 @@ export const FavoritesProvider: React.FC = ({ children }) => {
     loadFavorites();
   }, []);
 
-  const addOrgFavorites = useCallback(async (favority) => {
+  const addOrgFavorites = useCallback(async (favority: Favority) => {
     try {
-      const existFavority = favorites.map(p => p);
-      // console.log(existFavority);
-      if(existFavority.length === 0){
-        // console.log("Teste");
-        setFavorites([ ...favorites, ...favority]);
-        await AsyncStorage.setItem('@OrgNote:favorites', JSON.stringify(favorites));
-      } else {
-        // console.log("False");
-        setFavorites([...favorites, ...favority ]);
-        await AsyncStorage.setItem('@OrgNote:favorites', JSON.stringify(favorites));
-      }
+      
+      const newFavorites = [...favorites, {...favority}]
+
+      setFavorites(newFavorites);
+      await AsyncStorage.setItem('@OrgNote:favorites', JSON.stringify(newFavorites));
 
     } catch (error) {
       console.log(error);
     }
-  }, [favorites] );
+  }, [favorites]);
 
   const removeOrgFavorites = useCallback(async (favority) => {
 
     const index = favorites.indexOf(favority);
 
-    if(index > -1){
+    if (index > -1) {
       favorites.splice(index, 1);
     }
 
     const filterListFavorites = favorites.filter(f => f.id !== favority);
-    
+
     setFavorites(filterListFavorites);
     await AsyncStorage.setItem('@OrgNote:favorites', JSON.stringify(filterListFavorites));
   }, [favorites]);
@@ -81,14 +76,19 @@ export const FavoritesProvider: React.FC = ({ children }) => {
     setFavorites([]);
   }, []);
 
+  const value = useMemo(() => ({ favorites, addOrgFavorites, removeOrgFavorites, clearFavorites, loading }),
+    [favorites, addOrgFavorites, removeOrgFavorites, clearFavorites, loading],
+  );
+
   return (
-    <FavoritesContext.Provider value={{
-      favorites,
-      addOrgFavorites,
-      removeOrgFavorites,
-      clearFavorites,
-      loading,
-    }}>
+    // <FavoritesContext.Provider value={{
+    //   favorites,
+    //   addOrgFavorites,
+    //   removeOrgFavorites,
+    //   clearFavorites,
+    //   loading,
+    // }}>
+    <FavoritesContext.Provider value={value} >
       {children}
     </FavoritesContext.Provider>
   );

@@ -4,7 +4,10 @@
     "jsx": "react",
     "strict": true
   },
+  "include": ["**/src/**/*.ts", "**/src/**/*.tsx"],
   "files": [
-    "src/styles/styled.d.ts"
+    "src/@types/png.d.ts",
+    "src/@types/svg.d.ts",
+    "src/styles/styled.d.ts",
   ]
 }

@@ -150,11 +150,14 @@ const Search: React.FC = () => {
     if (favorityExists) {
       removeOrgFavorites(org.id);
     } else {
-      addOrgFavorites(
-        [org].map((item) => ({
-          ...item,
-          isFavorite: true
-        }))
+      addOrgFavorites({
+        ...org,
+        isFavorite: true
+      }
+        // [org].map((item) => ({
+        //   ...item,
+        //   isFavorite: true
+        // }))
       );
     }
     setIsFavorite(!isFavorite);

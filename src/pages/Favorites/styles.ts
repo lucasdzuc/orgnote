@@ -32,7 +32,7 @@ export const Info = styled.View`
 export const TextInfo = styled.Text`
   font-family: 'arimoregular';
   font-size: 15px;
-  color: #636363;
+  color: ${props => props.theme.colors.subtext};
   text-align: center;
 `;
 

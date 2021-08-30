@@ -7,7 +7,7 @@ type Response<T> = [
 ];
 
 function usePersistedState<T>(key: string, initialState: T): Response<T> {
-  const [state, setState] = useState(async () => {
+  const [state, setState] = useState<any>(async () => {
     const storageValue = await AsyncStorage.getItem(key);
 
     if (storageValue) {
@@ -17,8 +17,8 @@ function usePersistedState<T>(key: string, initialState: T): Response<T> {
     }
   });
 
-  useEffect(async () => {
-    await AsyncStorage.setItem(key, JSON.stringify(state));
+  useEffect(() => {
+    AsyncStorage.setItem(key, JSON.stringify(state));
   }, [key, state]);
 
   return [state, setState];
