@@ -1,15 +1,16 @@
-import React, { useState, useCallback, useRef } from 'react';
+import React, { useState, useCallback } from 'react';
 import { TextInputProps } from 'react-native';
 
 import { Container, TextInput, ButtonClearInput, Icon } from './styles';
 
 interface InputProps extends TextInputProps {
   name?: string;
+  handleClearInput(): void;
 }
 
-const SearchInput: React.FC<InputProps> = ({ value = '', ...rest }) => {
+const SearchInput: React.FC<InputProps> = ({ value = '', handleClearInput, ...rest }) => {
 
-  const inputRef = useRef(null);
+  // const inputRef = useRef(null);
 
   const [isFocused, setIsFocused] = useState(false);
   const [isFilled, setIsFilled] = useState(false);
@@ -24,20 +25,20 @@ const SearchInput: React.FC<InputProps> = ({ value = '', ...rest }) => {
     setIsFilled(!!value);
   }, [value]);
 
-  const handleClearInput = useCallback(() => {
-    inputRef.current.clear();
-  }, [inputRef]);
+  // const handleClearInput = useCallback(() => {
+  //   inputRef?.current.clear();
+  // }, [inputRef?.current]);
 
   return (
     <Container isFocused={isFocused}>
 
       <TextInput
-        ref={inputRef}
         placeholderTextColor="#B7B7CC"
         onFocus={handleInputFocus}
         onBlur={handleInputBlur}
         value={value}
         testID="search-input"
+        handleClearInput={handleClearInput}
         {...rest}
       />
 

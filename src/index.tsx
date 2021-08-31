@@ -1,6 +1,6 @@
 import 'react-native-gesture-handler';
 import React, { useState, useCallback } from 'react';
-import { View, StatusBar, ActivityIndicator } from 'react-native';
+import { View, StatusBar, ActivityIndicator, LogBox } from 'react-native';
 import { ThemeProvider, DefaultTheme } from 'styled-components';
 import { useFonts } from 'expo-font';
 import AppLoading from 'expo-app-loading'
@@ -17,14 +17,16 @@ import useFavorites from './hooks/useFavorites';
 
 const AppMobile: React.FC = () => {
 
+  LogBox.ignoreAllLogs();
+
   const { loading } = useFavorites();
 
   // const [theme, setTheme] = usePersistedState<DefaultTheme>('theme', light);
   const [theme, setTheme] = useState(light);
 
   const toggleTheme = useCallback(() => {
-    setTheme(theme.title === 'light' ? dark : light);
-  }, [theme.title]);
+    setTheme(theme?.title === 'light' ? dark : light);
+  }, [theme?.title]);
 
   const [fontsLoaded] = useFonts({
     'arimoregular': require('./assets/fonts/Arimo-Regular.ttf'),
@@ -43,9 +45,9 @@ const AppMobile: React.FC = () => {
 
   return (
     <ThemeProvider theme={theme}>
-      <View style={{ flex: 1, backgroundColor: theme.title === 'light' ? "#FAFAFA" : "#000000" }}>
+      <View style={{ flex: 1, backgroundColor: theme?.title === 'light' ? "#FAFAFA" : "#000000" }}>
         <FavoritesProvider>
-          <StatusBar barStyle={theme.title === 'light' ? "dark-content" : "light-content"} backgroundColor="transparent" translucent />
+          <StatusBar barStyle={theme?.title === 'light' ? "dark-content" : "light-content"} backgroundColor="transparent" translucent />
           <Routes toggleTheme={toggleTheme} />
         </FavoritesProvider>
       </View>

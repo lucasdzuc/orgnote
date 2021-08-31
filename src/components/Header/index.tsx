@@ -11,7 +11,7 @@ interface PropsTheme {
 
 const Header: React.FC<PropsTheme> = ({ toggleTheme }) => {
 
-  const { colors, title } = useContext(ThemeContext);
+  const { title } = useContext(ThemeContext);
 
   return (
     <Container>

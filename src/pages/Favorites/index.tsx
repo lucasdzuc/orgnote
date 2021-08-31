@@ -75,6 +75,10 @@ const Favorites: React.FC = () => {
     setIsFavorite(!isFavorite);
   }, [isFavorite, favorites]);
 
+  const handleClearInput = () => {
+    setSearchFavority('');
+  }
+
   return (
     <Container>
 
@@ -96,6 +100,7 @@ const Favorites: React.FC = () => {
                 value={searchFavority}
                 onChangeText={setSearchFavority}
                 placeholder="Procurar suas organizações salvas..."
+                handleClearInput={handleClearInput}
               />
             </HeaderContainerList>
           }

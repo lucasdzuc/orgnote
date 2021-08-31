@@ -7,7 +7,7 @@ type Response<T> = [
 ];
 
 function usePersistedState<T>(key: string, initialState: T): Response<T> {
-  const [state, setState] = useState<any>(async () => {
+  const [state, setState] = useState(async () => {
     const storageValue = await AsyncStorage.getItem(key);
 
     if (storageValue) {
