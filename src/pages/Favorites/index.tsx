@@ -97,7 +97,7 @@ const Favorites: React.FC = () => {
   }, [isFavorite, favorites]);
 
   const handleClearInput = () => {
-    setSearchFavority('');
+    return setSearchFavority(''), filterFavorites;
   }
 
   return (
