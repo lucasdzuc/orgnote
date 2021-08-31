@@ -59,11 +59,13 @@ const Favorites: React.FC = () => {
     Linking.openURL(url);
   }, []);
 
+  // FILTER FAVORITES
   const filterFavorites = useMemo(() => {
     const lowerSearch = searchFavority.toLowerCase(searchFavority);
     return favorites.filter(({ name }) => name?.toLowerCase().includes(lowerSearch));
   }, [searchFavority, favorites]);
 
+  // TOGGLE ADD OR REMOVE FAVORITE
   const toggleFavorite = useCallback((org) => {
     const favorityExists = favorites.find(p => p.id === org.id);
     if (favorityExists) {
@@ -91,11 +93,13 @@ const Favorites: React.FC = () => {
             paddingHorizontal: 16,
           }}
           ListFooterComponent={
-            searchFavority.length > 0 && filterFavorites.length === 0 && (
+            searchFavority.length > 0 && filterFavorites.length === 0 ? (
               <MessageNotFoundOrg>
                 <EmojiTristeIcon width={20} height={20} />
                 <TextMessageNotFoundOrg>Oops! Não encontramos organizações{'\n'}com este nome.</TextMessageNotFoundOrg>
               </MessageNotFoundOrg>
+            ) : (
+              <View />
             )
           }
           ListFooterComponentStyle={{
@@ -112,7 +116,7 @@ const Favorites: React.FC = () => {
             </HeaderContainerList>
           }
           renderItem={({ item }) => (
-            filterFavorites.length > 0 ? (
+            filterFavorites.length > 0 && (
               <Org>
                 <OrgInternContainer>
                   <OrgAvatarContainer>
@@ -136,14 +140,6 @@ const Favorites: React.FC = () => {
                   </ButtonSaveFavorityOrg>
                 </AreaButtons>
               </Org>
-            ) : (
-              <View />
-              // searchFavority.length > 0 && filterFavorites.length === 0 && (
-                // <MessageNotFoundOrg>
-                //   <EmojiTristeIcon width={20} height={20} />
-                //   <TextMessageNotFoundOrg>Oops! Não encontramos organizações{'\n'}com este nome.</TextMessageNotFoundOrg>
-                // </MessageNotFoundOrg>
-              // )
             )
           )}
         />

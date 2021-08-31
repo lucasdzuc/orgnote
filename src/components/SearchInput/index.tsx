@@ -5,27 +5,32 @@ import { useNavigation } from '@react-navigation/native';
 // IMPORT DEBOUNCE
 // import useDebounce from '../../utils/useDebounce';
 
-import { Container, TextInput, Icon, ButtonGoBack, ButtonClearInput } from './styles';
+import { Container, TextInput, Icon, ButtonGoBack } from './styles';
 
 interface InputProps extends TextInputProps {
   name?: string;
+  handleClearInput(): void;
 }
 
-const SearchInput: React.FC<InputProps> = ({ value = '', ...rest }) => {
+interface InputRef {
+  focus(): void;
+}
 
-  const inputRef = useRef(null);
+const SearchInput: React.ForwardRefRenderFunction<InputRef, InputProps> = ({ value = '', handleClearInput, ...rest }) => {
+
+  const inputRef = useRef<any>(null);
 
   const { goBack } = useNavigation();
 
   // const [displayValue, setDisplayValue] = useState(value);
   // const debouncedChange = useDebounce(onChangeText, 300);
 
-  const [isFocused, setIsFocused] = useState(false);
+  const [isFocused, setIsFocused] = useState(true);
   const [isFilled, setIsFilled] = useState(false);
 
   useEffect(() => {
     inputRef.current.focus();
-  }, []);
+  }, [inputRef.current]);
 
   const handleInputFocus = useCallback(() => {
     setIsFocused(true);
@@ -40,11 +45,6 @@ const SearchInput: React.FC<InputProps> = ({ value = '', ...rest }) => {
   const navigateBack = useCallback(() => {
     goBack();
   }, []);
-
-  // function handleChange(inputRef: { current: React.SetStateAction<string | undefined>; }){
-  //   setDisplayValue(inputRef.current);
-  //   debouncedChange(inputRef.current);
-  // }
 
   return (
     <Container isFocused={isFocused}>
@@ -65,12 +65,21 @@ const SearchInput: React.FC<InputProps> = ({ value = '', ...rest }) => {
         testID="search-input"
         {...rest}
       />
-
-      <Icon
-        name="search"
-        size={22}
-        color={isFocused || isFilled ? '#2196f3' : '#969696'}
-      />
+      
+      {value.length > 0 ? (
+        <Icon 
+          name="x" 
+          size={22}
+          color={isFocused || isFilled ? '#2196F3' : '#969696'}
+          onPress={handleClearInput}
+        />
+      ) : (
+        <Icon
+          name="search"
+          size={22}
+          color={isFocused || isFilled ? '#2196f3' : '#969696'}
+        />
+      )}
     </Container>
   );
 };

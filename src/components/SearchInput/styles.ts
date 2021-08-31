@@ -39,8 +39,6 @@ export const TextInput = styled.TextInput`
   color: ${props => props.theme.colors.searchtextvalue};
 `;
 
-export const ButtonClearInput = styled.TouchableOpacity``;
-
 export const Icon = styled(FeatherIcon)`
   margin: 0px 24px;
 `;

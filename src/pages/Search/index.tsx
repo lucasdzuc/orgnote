@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback, useRef } from 'react';
-import { View, Text, ScrollView, Image, Alert } from 'react-native';
+import { View, Text, ScrollView, Image, Alert, TextInputProps } from 'react-native';
 import axios from 'axios';
 
 // IMPORT API SERVER
@@ -57,6 +57,8 @@ interface Organizations {
 }
 
 const Search: React.FC = () => {
+
+  // const searchRef = useRef<any>(null);
 
   const { addOrgFavorites, removeOrgFavorites, favorites } = useFavorites();
 
@@ -143,7 +145,8 @@ const Search: React.FC = () => {
     setSearchValue(value);
     debounce(function () {
       loadOrganizations(value);
-  }, 300)}
+    }, 300)
+  };
 
   const toggleFavorite = useCallback((org) => {
     const favorityExists = favorites.find(p => p.id === org.id);
@@ -163,6 +166,10 @@ const Search: React.FC = () => {
     setIsFavorite(!isFavorite);
   }, [isFavorite, favorites]);
 
+  const handleClearInput = () => {
+    setSearchValue('');
+  }
+
   return (
     <Container>
 
@@ -171,6 +178,7 @@ const Search: React.FC = () => {
           value={searchValue}
           onChangeText={(text) => handleChange(text)}
           placeholder="Procurar organizações..."
+          handleClearInput={handleClearInput}
         />
       </ContentInputSearch>
 
