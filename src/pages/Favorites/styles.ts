@@ -151,6 +151,8 @@ export const TextButtonSaveFavorityOrg = styled.Text`
 `;
 
 export const MessageNotFoundOrg = styled.View`
+  flex: 1;
+  /* background: grey; */
   justify-content: center;
   align-items: center;
 `;

@@ -90,7 +90,14 @@ const Favorites: React.FC = () => {
             paddingVertical: 8,
             paddingHorizontal: 16,
           }}
-          ListFooterComponent={<View />}
+          ListFooterComponent={
+            searchFavority.length > 0 && filterFavorites.length === 0 && (
+              <MessageNotFoundOrg>
+                <EmojiTristeIcon width={20} height={20} />
+                <TextMessageNotFoundOrg>Oops! Não encontramos organizações{'\n'}com este nome.</TextMessageNotFoundOrg>
+              </MessageNotFoundOrg>
+            )
+          }
           ListFooterComponentStyle={{
             height: 80,
           }}
@@ -130,12 +137,13 @@ const Favorites: React.FC = () => {
                 </AreaButtons>
               </Org>
             ) : (
-              searchFavority.length > 0 && filterFavorites.length === 0 && (
-                <MessageNotFoundOrg>
-                  <EmojiTristeIcon width={20} height={20} />
-                  <TextMessageNotFoundOrg>Oops! Não encontramos organizações{'\n'}com este nome.</TextMessageNotFoundOrg>
-                </MessageNotFoundOrg>
-              )
+              <View />
+              // searchFavority.length > 0 && filterFavorites.length === 0 && (
+                // <MessageNotFoundOrg>
+                //   <EmojiTristeIcon width={20} height={20} />
+                //   <TextMessageNotFoundOrg>Oops! Não encontramos organizações{'\n'}com este nome.</TextMessageNotFoundOrg>
+                // </MessageNotFoundOrg>
+              // )
             )
           )}
         />
