@@ -168,6 +168,7 @@ const Search: React.FC = () => {
 
   const handleClearInput = () => {
     setSearchValue('');
+    setOrganizations([]);
   }
 
   return (

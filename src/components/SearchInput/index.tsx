@@ -62,6 +62,7 @@ const SearchInput: React.ForwardRefRenderFunction<InputRef, InputProps> = ({ val
         onBlur={handleInputBlur}
         value={value}
         placeholderTextColor="#969696"
+        keyboardAppearance="dark"
         testID="search-input"
         {...rest}
       />

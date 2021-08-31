@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback, useMemo } from 'react';
-import { View, Text, TextInput, Image, Linking } from 'react-native';
+import { View, Text, TextInput, Image, Linking, Alert } from 'react-native';
 
 // IMPORT HOOK OF BAG
 import useFavorites from '../../hooks/useFavorites';
@@ -67,14 +67,33 @@ const Favorites: React.FC = () => {
 
   // TOGGLE ADD OR REMOVE FAVORITE
   const toggleFavorite = useCallback((org) => {
-    const favorityExists = favorites.find(p => p.id === org.id);
-    if (favorityExists) {
-      removeOrgFavorites(org.id);
-    } 
+    Alert.alert(`${org.name}`, `Deseja realmente excluir a organização da sua lista?`,
+      [
+        {
+          text: "Cancelar",
+          onPress: () => { }, // console.log("Cancel Pressed"),
+          style: "cancel"
+        },
+        {
+          text: "SIM", onPress: () => {
+            try {
+              removeOrgFavorites(org.id);
+            } catch (error) {
+              console.log(error);
+            }
+          }
+        }
+      ],
+      { cancelable: false }
+    );
+    // const favorityExists = favorites.find(p => p.id === org.id);
+    // if (favorityExists) {
+    //   removeOrgFavorites(org.id);
+    // }
     // else {
     //   addOrgFavorites([org]);
     // }
-    setIsFavorite(!isFavorite);
+    // setIsFavorite(!isFavorite);
   }, [isFavorite, favorites]);
 
   const handleClearInput = () => {
@@ -135,8 +154,8 @@ const Favorites: React.FC = () => {
                   </ButtonAcessLink>
 
                   <ButtonSaveFavorityOrg onPress={() => toggleFavorite(item)} testID={`item-${item.id}`} isFavorite={item.isFavorite} activeOpacity={0.6}>
-                    {item.isFavorite ? <SalvoBrancoIcon width={20} height={20} /> : <SalvoAzulIcon width={20} height={20} /> }
-                    <TextButtonSaveFavorityOrg isFavorite={item.isFavorite}>{item.isFavorite ? 'Salvo' : 'Salvar' }</TextButtonSaveFavorityOrg>
+                    {item.isFavorite ? <SalvoBrancoIcon width={20} height={20} /> : <SalvoAzulIcon width={20} height={20} />}
+                    <TextButtonSaveFavorityOrg isFavorite={item.isFavorite}>{item.isFavorite ? 'Salvo' : 'Salvar'}</TextButtonSaveFavorityOrg>
                   </ButtonSaveFavorityOrg>
                 </AreaButtons>
               </Org>

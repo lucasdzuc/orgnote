@@ -37,8 +37,9 @@ const SearchInput: React.FC<InputProps> = ({ value = '', handleClearInput, ...re
         onFocus={handleInputFocus}
         onBlur={handleInputBlur}
         value={value}
-        testID="search-input"
         handleClearInput={handleClearInput}
+        keyboardAppearance="dark"
+        testID="search-input"
         {...rest}
       />
 
