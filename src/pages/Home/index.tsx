@@ -40,11 +40,11 @@ import {
 
 interface Organizations {
   id: number;
-  name: string;
-  description: string;
-  avatar_url: string;
-  html_url: string;
-  isFavorite: boolean;
+  name?: string;
+  description?: string;
+  avatar_url?: string;
+  html_url?: string;
+  isFavorite?: boolean;
 }
 
 interface PropsTheme {
@@ -66,12 +66,14 @@ const Home: React.FC<PropsTheme> = ({ toggleTheme }) => {
     async function loadOrganizations(): Promise<void> {
       try {
         const response = await axios.get(`https://api.github.com/orgs/Microsoft`);
+        // const response = await axios.get(`https://api.github.com/organizations`);
         // console.log(response.data);
         const equalsOrg = favorites.find(org => org.id === response.data.id);
 
         setOrganizations(
           [response.data].map((item) => ({
             ...item,
+            name: item.login,
             isFavorite: equalsOrg ? true : false,
           }))
         );

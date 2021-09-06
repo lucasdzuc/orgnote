@@ -25,7 +25,7 @@ interface PropsTheme {
 
 const AppRoutes: React.FC<PropsTheme> = ({ toggleTheme }) => {
 
-  const { title, colors } = useContext(ThemeContext);
+  const { title } = useContext(ThemeContext);
   
   const { clearFavorites, favorites } = useFavorites();
   
@@ -102,10 +102,9 @@ const AppRoutes: React.FC<PropsTheme> = ({ toggleTheme }) => {
                 />
               )
             ),
-            // headerRightContainerStyle: {
-            //   marginRight: 24,
-            // },
+            headerShown: true,
             title: 'Suas organizações salvas',
+            headerTitleAlign: 'center',
             headerTitleStyle: {
               fontFamily: 'arimoregular',
               fontSize: 16,
@@ -117,6 +116,9 @@ const AppRoutes: React.FC<PropsTheme> = ({ toggleTheme }) => {
               borderWidth: 0,
               shadowColor: 'transparent',
             },
+            // headerRightContainerStyle: {
+            //   marginRight: 24,
+            // },
           })}
         />
 

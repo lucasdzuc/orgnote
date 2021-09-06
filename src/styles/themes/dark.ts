@@ -7,7 +7,7 @@ export default {
     terciary: '#fff',
     iconColor: '#000',
     text: '#FAFAFA',
-    subtext: '#707070',
+    subtext: '#919191',
     buttonprimary: '#2196f3',
     buttonsecondary: 'rgba(33, 150, 243, 0.1)',
     background: '#000',
@@ -19,7 +19,7 @@ export default {
 
     card: '#222',
     cardname: '#2196f3',
-    carddescription: '#969696',
+    carddescription: '#c4c4c4',
 
     emptytext: '#969696',
   },

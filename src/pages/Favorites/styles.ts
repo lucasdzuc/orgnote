@@ -84,7 +84,7 @@ export const OrgContent = styled.View`
 export const OrgName = styled.Text`
   font-family: 'arimomedium';
   font-size: 16px;
-  color: #2196f3;
+  color: ${props => props.theme.colors.cardname};
   font-weight: 700;
 `;
 

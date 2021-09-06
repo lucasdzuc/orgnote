@@ -171,8 +171,10 @@ export const TextButtonSaveFavorityOrg = styled.Text`
 
 export const FloatingButton = styled.View`
   /* flex: 1; */
+  /* z-index: 99; */
   position: absolute;
   /* width: 100%; */
+  /* height: 100%; */
   /* padding: 0px 16px; */
   flex-direction: row;
   justify-content: space-between;
