@@ -156,9 +156,9 @@ const Home: React.FC<PropsTheme> = ({ toggleTheme }) => {
       </OrgContainer>
 
       <FloatingButton>
-        {/* <ButtonTheme onPress={toggleTheme} activeOpacity={0.7}>
+        <ButtonTheme onPress={toggleTheme} activeOpacity={0.7}>
           <Icon name={title === 'light' ? 'moon' : 'sun'} size={24} color={title === 'light' ? "#000" : "#2196f3" } />
-        </ButtonTheme> */}
+        </ButtonTheme>
 
         <ButtonNavigateFavority onPress={handleNavigateFavorities} activeOpacity={0.7}>
           <TextButtonNavigate>Ver salvos</TextButtonNavigate>

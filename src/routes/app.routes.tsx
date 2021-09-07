@@ -62,10 +62,11 @@ const AppRoutes: React.FC<PropsTheme> = ({ toggleTheme }) => {
       >
         <App.Screen
           name="Home"
-          component={Home}
+          // component={Home}
+          component={useCallback(() => (<Home toggleTheme={toggleTheme} />), [toggleTheme])}
           options={{
-            headerShown: true,
-            header: () => <Header toggleTheme={toggleTheme} />,
+            headerShown: false,
+            // header: () => <Header toggleTheme={toggleTheme} />,
           }}
         />
 

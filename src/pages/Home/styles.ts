@@ -9,7 +9,7 @@ import SetaDireitaBrancoIcon from '../../assets/icons/seta_direita_branco.svg';
 
 export const Container = styled.View`
   flex: 1;
-  padding-top: ${Platform.OS === 'ios' ? getStatusBarHeight() + 24 : 24}px;
+  padding-top: ${Platform.OS === 'ios' ? getStatusBarHeight() + 24 : 64}px;
   background: ${props => props.theme.colors.background};
 `;
 
@@ -186,7 +186,7 @@ export const FloatingButton = styled.View`
 export const ButtonTheme = styled.TouchableOpacity`
   width: 48px;
   height: 48px;
-
+  margin-right: 16px;
   border-radius: 50px;
   background: ${props => props.theme.colors.secondary};
   justify-content: center;
