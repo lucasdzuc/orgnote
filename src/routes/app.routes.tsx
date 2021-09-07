@@ -30,7 +30,9 @@ const AppRoutes: React.FC<PropsTheme> = ({ toggleTheme }) => {
   const { clearFavorites, favorites } = useFavorites();
   
   const clearAllFavorites = useCallback(() => {
-    Alert.alert("Deseja realmente excluir todas as suas organizações salvas?", "",
+    Alert.alert(
+      "Deseja realmente excluir todas as suas organizações salvas?", 
+      "Ao excluir suas organizações salvas todos os dados serão removidos da lista.",
     [
       {
         text: "Cancelar",

@@ -5,7 +5,7 @@ import { useNavigation } from '@react-navigation/native';
 // IMPORT DEBOUNCE
 // import useDebounce from '../../utils/useDebounce';
 
-import { Container, TextInput, Icon, ButtonGoBack } from './styles';
+import { Container, TextInput, IconLeft, IconRight, ButtonGoBack } from './styles';
 
 interface InputProps extends TextInputProps {
   name?: string;
@@ -29,8 +29,8 @@ const SearchInput: React.ForwardRefRenderFunction<InputRef, InputProps> = ({ val
   const [isFilled, setIsFilled] = useState(false);
 
   useEffect(() => {
-    inputRef.current.focus();
-  }, [inputRef.current]);
+    inputRef?.current.focus();
+  }, [inputRef?.current]);
 
   const handleInputFocus = useCallback(() => {
     setIsFocused(true);
@@ -49,9 +49,9 @@ const SearchInput: React.ForwardRefRenderFunction<InputRef, InputProps> = ({ val
   return (
     <Container isFocused={isFocused}>
       <ButtonGoBack onPress={navigateBack} activeOpacity={0.8}>
-        <Icon 
+        <IconLeft 
           name="arrow-left"
-          size={22} 
+          size={22}
           color="#969696" 
         />
       </ButtonGoBack>
@@ -68,14 +68,14 @@ const SearchInput: React.ForwardRefRenderFunction<InputRef, InputProps> = ({ val
       />
       
       {value.length > 0 ? (
-        <Icon 
+        <IconRight
           name="x" 
           size={22}
           color={isFocused || isFilled ? '#2196F3' : '#969696'}
           onPress={handleClearInput}
         />
       ) : (
-        <Icon
+        <IconRight
           name="search"
           size={22}
           color={isFocused || isFilled ? '#2196f3' : '#969696'}

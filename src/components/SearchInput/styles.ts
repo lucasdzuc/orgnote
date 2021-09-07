@@ -39,7 +39,11 @@ export const TextInput = styled.TextInput`
   color: ${props => props.theme.colors.searchtextvalue};
 `;
 
-export const Icon = styled(FeatherIcon)`
+export const IconLeft = styled(FeatherIcon)`
+  margin: 0px 24px;
+`;
+
+export const IconRight = styled(FeatherIcon)`
   margin: 0px 24px;
 `;
 

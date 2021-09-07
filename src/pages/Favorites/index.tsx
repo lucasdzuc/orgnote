@@ -111,16 +111,6 @@ const Favorites: React.FC = () => {
             paddingVertical: 8,
             paddingHorizontal: 16,
           }}
-          ListFooterComponent={
-            searchFavority.length > 0 && filterFavorites.length === 0 ? (
-              <MessageNotFoundOrg>
-                <EmojiTristeIcon width={20} height={20} />
-                <TextMessageNotFoundOrg>Oops! Não encontramos organizações{'\n'}com este nome.</TextMessageNotFoundOrg>
-              </MessageNotFoundOrg>
-            ) : (
-              <View />
-            )
-          }
           ListFooterComponentStyle={{
             height: 80,
           }}
@@ -133,6 +123,16 @@ const Favorites: React.FC = () => {
                 handleClearInput={handleClearInput}
               />
             </HeaderContainerList>
+          }
+          ListFooterComponent={
+            searchFavority.length > 0 && filterFavorites.length === 0 ? (
+              <MessageNotFoundOrg>
+                <EmojiTristeIcon width={20} height={20} />
+                <TextMessageNotFoundOrg>Oops! Não encontramos organizações{'\n'}com este nome.</TextMessageNotFoundOrg>
+              </MessageNotFoundOrg>
+            ) : (
+              <View />
+            )
           }
           renderItem={({ item }) => (
             filterFavorites.length > 0 && (
