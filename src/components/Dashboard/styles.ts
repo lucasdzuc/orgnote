@@ -16,7 +16,7 @@ export const CardDash = styled.View`
   padding: 4px;
   border-radius: 14px;
   background: ${props => props.theme.colors.carddash};
-  /* background: ${props => props.bgColor}; */
+  /* background-color: ${props => props.bgColor}; */
   justify-content: center;
   /* align-items: center; */
   ${css`

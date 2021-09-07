@@ -3,7 +3,11 @@ import { View, Text, ScrollView, Dimensions } from 'react-native';
 
 const { width } = Dimensions.get('window');
 
-import categories from '../categories';
+// IMPORT HOOKS
+import useFavorites from '../../hooks/useFavorites';
+
+// IMPORT COMPONENTS
+import { categories } from '../Categories';
 
 import { 
   Container,
@@ -15,6 +19,9 @@ import {
 } from './styles';
 
 const Dashboard: React.FC = () => {
+
+  const { favorites } = useFavorites();
+
   return (
     <Container
       horizontal
@@ -36,7 +43,7 @@ const Dashboard: React.FC = () => {
 
       {categories.map(category => (
         <CardDash key={category.id}>
-          <ContentResult bgColor={category.bgColor}>
+          <ContentResult>
             <TotalResultCardDash>{category.value}</TotalResultCardDash>
           </ContentResult>
           <ContentTitle>
