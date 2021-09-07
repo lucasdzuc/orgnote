@@ -10,14 +10,14 @@ export const Container = styled.View`
 
 export const HeaderContainer = styled.View`
   margin-bottom: 8px;
-  padding: 16px 16px 0px;
+  /* padding: 16px 16px 0px; */
   background: ${props => props.theme.colors.background};;
 `;
 
 export const ProductList = styled(FlatList)``;
 
 export const HeaderContainerList = styled.View`
-  margin-bottom: 16px;
+  margin-bottom: 8px;
   background: ${props => props.theme.colors.background};
 `;
 

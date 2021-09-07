@@ -6,6 +6,7 @@ import useFavorites from '../../hooks/useFavorites';
 
 // IMPORT COMPONENTS
 import SearchFavorites from '../../components/SearchFavorites';
+import Dashboard from '../../components/Dashboard';
 
 // IMPORT ICONS
 import SalvoBrancoIcon from '../../assets/icons/salvo_branco.svg';
@@ -111,9 +112,6 @@ const Favorites: React.FC = () => {
             paddingVertical: 8,
             paddingHorizontal: 16,
           }}
-          ListFooterComponentStyle={{
-            height: 80,
-          }}
           ListHeaderComponent={
             <HeaderContainerList>
               <SearchFavorites
@@ -122,8 +120,14 @@ const Favorites: React.FC = () => {
                 placeholder="Procurar suas organizações salvas..."
                 handleClearInput={handleClearInput}
               />
+              {searchFavority.length == 0 && (
+                <Dashboard />
+              )}
             </HeaderContainerList>
           }
+          ListHeaderComponentStyle={{
+            paddingHorizontal: 0,
+          }}
           ListFooterComponent={
             searchFavority.length > 0 && filterFavorites.length === 0 ? (
               <MessageNotFoundOrg>
@@ -132,8 +136,11 @@ const Favorites: React.FC = () => {
               </MessageNotFoundOrg>
             ) : (
               <View />
-            )
-          }
+              )
+            }
+          ListFooterComponentStyle={{
+            height: 80,
+          }}
           renderItem={({ item }) => (
             filterFavorites.length > 0 && (
               <Org>

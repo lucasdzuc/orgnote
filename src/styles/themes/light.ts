@@ -22,6 +22,8 @@ export default {
     carddescription: '#636363',
 
     emptytext: '#000',
+
+    carddash: '#FFF'
   },
 
 };

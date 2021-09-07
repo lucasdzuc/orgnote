@@ -30,6 +30,8 @@ declare module 'styled-components' {
       carddescription: string,
 
       emptytext: string,
+
+      carddash: string,
     };
 
   }
