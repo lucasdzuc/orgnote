@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components/native';
 
-export const Container = styled.ScrollView`
+export const ContainerScrollProvider = styled.ScrollView`
   flex: 1;
   /* padding-top: 12px; */
   /* flex-direction: row; */
@@ -16,7 +16,7 @@ export const CardDash = styled.View`
   padding: 4px;
   border-radius: 14px;
   background: ${props => props.theme.colors.carddash};
-  /* background-color: ${props => props.bgColor}; */
+  /* background-color: ${props => props.backgroundColor}; */
   justify-content: center;
   /* align-items: center; */
   ${css`
@@ -36,8 +36,8 @@ export const ContentResult = styled.View`
 
 export const TotalResultCardDash = styled.Text`
   font-family: 'arimomedium';
-  font-size: 16px;
-  color: ${props => props.theme.colors.text};
+  font-size: 17px;
+  color: ${props => props.colorValue};
   text-align: center;
 `;
 

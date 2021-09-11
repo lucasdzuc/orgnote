@@ -120,9 +120,9 @@ const Favorites: React.FC = () => {
                 placeholder="Procurar suas organizações salvas..."
                 handleClearInput={handleClearInput}
               />
-              {/* {searchFavority.length == 0 && (
+              {searchFavority.length == 0 && (
                 <Dashboard />
-              )} */}
+              )}
             </HeaderContainerList>
           }
           ListHeaderComponentStyle={{

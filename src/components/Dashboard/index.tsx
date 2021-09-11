@@ -1,16 +1,16 @@
 import React from 'react';
-import { View, Text, ScrollView, Dimensions } from 'react-native';
+import { View, Text, Dimensions } from 'react-native';
 
-const { width } = Dimensions.get('window');
+// const { width } = Dimensions.get('window');
 
 // IMPORT HOOKS
-import useFavorites from '../../hooks/useFavorites';
+// import useFavorites from '../../hooks/useFavorites';
 
 // IMPORT COMPONENTS
 import { categories } from '../Categories';
 
 import { 
-  Container,
+  ContainerScrollProvider,
   CardDash, 
   ContentResult,
   TotalResultCardDash,
@@ -20,10 +20,12 @@ import {
 
 const Dashboard: React.FC = () => {
 
-  const { favorites } = useFavorites();
+  // const { favorites } = useFavorites();
+
+  // console.log(favorites.length);
 
   return (
-    <Container
+    <ContainerScrollProvider
       horizontal
       showsHorizontalScrollIndicator={false}
       contentContainerStyle={{
@@ -32,19 +34,10 @@ const Dashboard: React.FC = () => {
       }}
     >
 
-    {/* <ScrollView
-      style={{ flex: 1 }}
-      horizontal
-      showsHorizontalScrollIndicator={false}
-      contentContainerStyle={{
-        paddingHorizontal: 0,
-      }}
-    > */}
-
       {categories.map(category => (
-        <CardDash key={category.id}>
+        <CardDash key={category.id} backgroundColor={category.backgroundColor}>
           <ContentResult>
-            <TotalResultCardDash>{category.value}</TotalResultCardDash>
+            <TotalResultCardDash colorValue={category.colorValue}>{category.value}</TotalResultCardDash>
           </ContentResult>
           <ContentTitle>
             <TextCardDash>{category.title}</TextCardDash>
@@ -52,9 +45,7 @@ const Dashboard: React.FC = () => {
         </CardDash>
       ))}
 
-    {/* </ScrollView> */}
-
-    </Container>
+    </ContainerScrollProvider>
   );
 }
 

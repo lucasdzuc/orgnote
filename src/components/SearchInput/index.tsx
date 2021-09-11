@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback, useRef } from 'react';
-import { TextInputProps } from 'react-native';
+import { TextInputProps, Platform } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
 // IMPORT DEBOUNCE
@@ -68,12 +68,14 @@ const SearchInput: React.ForwardRefRenderFunction<InputRef, InputProps> = ({ val
       />
       
       {value.length > 0 ? (
-        <IconRight
-          name="x" 
-          size={22}
-          color={isFocused || isFilled ? '#2196F3' : '#969696'}
-          onPress={handleClearInput}
-        />
+        Platform.OS !== 'ios' && (
+          <IconRight
+            name="x" 
+            size={22}
+            color={isFocused || isFilled ? '#2196F3' : '#969696'}
+            onPress={handleClearInput}
+          />
+        )
       ) : (
         <IconRight
           name="search"

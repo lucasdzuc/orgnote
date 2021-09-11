@@ -17,7 +17,7 @@ export const HeaderContainer = styled.View`
 export const ProductList = styled(FlatList)``;
 
 export const HeaderContainerList = styled.View`
-  margin-bottom: 8px;
+  margin-bottom: 0px;
   background: ${props => props.theme.colors.background};
 `;
 

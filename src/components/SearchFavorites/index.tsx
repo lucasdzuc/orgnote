@@ -1,5 +1,5 @@
 import React, { useState, useCallback } from 'react';
-import { TextInputProps } from 'react-native';
+import { TextInputProps, Platform } from 'react-native';
 
 import { Container, TextInput, ButtonClearInput, Icon } from './styles';
 
@@ -43,14 +43,15 @@ const SearchInput: React.FC<InputProps> = ({ value = '', handleClearInput, ...re
         {...rest}
       />
 
-      {value.length > 0 && (
-      <ButtonClearInput onPress={handleClearInput} activeOpacity={0.6} >
-        <Icon
-          name="x"
-          size={22}
-          color={isFocused || isFilled ? '#2196f3' : '#969696'}
-        />
-      </ButtonClearInput>
+      {Platform.OS !== 'ios' && 
+        value.length > 0 && (
+        <ButtonClearInput onPress={handleClearInput} activeOpacity={0.6} >
+          <Icon
+            name="x"
+            size={22}
+            color={isFocused || isFilled ? '#2196f3' : '#969696'}
+          />
+        </ButtonClearInput>
       )}
     </Container>
   );
