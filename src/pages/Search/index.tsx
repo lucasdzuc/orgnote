@@ -7,6 +7,8 @@ import api from '../../services/api';
 
 // IMPORT HOOKS
 import useFavorites from '../../hooks/useFavorites';
+import useLogOrg from '../../hooks/useLogOrg';
+
 // import useDebouncePromise from '../../utils/useDebouncePromise';
 import useDebounceNew from '../../utils/useDebounceNew';
 
@@ -54,6 +56,7 @@ interface Organizations {
   avatar_url?: string;
   html_url?: string;
   isFavorite?: boolean;
+  addedIn?: string;
 }
 
 const Search: React.FC = () => {
@@ -61,6 +64,7 @@ const Search: React.FC = () => {
   // const searchRef = useRef<any>(null);
 
   const { addOrgFavorites, removeOrgFavorites, favorites } = useFavorites();
+  const { addOrgLog } = useLogOrg();
 
   const [organizations, setOrganizations] = useState<Organizations[]>([]);
   const [searchValue, setSearchValue] = useState('');
@@ -123,10 +127,13 @@ const Search: React.FC = () => {
 
         const existOrgFavority = favorites.find(f => f.id === response.data.id);
 
+        const dateNow = new Date();
+        
         setOrganizations(
           [response.data].map((item: Organizations) => ({
             ...item,
             isFavorite: existOrgFavority ? true : false,
+            addedIn: dateNow.toLocaleString(),
           }))
         );
         
@@ -150,18 +157,25 @@ const Search: React.FC = () => {
 
   const toggleFavorite = useCallback((org) => {
     const favorityExists = favorites.find(p => p.id === org.id);
+    const dateNow = new Date();
     if (favorityExists) {
       removeOrgFavorites(org.id);
     } else {
       addOrgFavorites({
         ...org,
-        isFavorite: true
+        isFavorite: true,
+        addedIn: dateNow.toLocaleString(),
       }
         // [org].map((item) => ({
         //   ...item,
         //   isFavorite: true
         // }))
       );
+      addOrgLog({
+        ...org,
+        isFavorite: true,
+        addedIn: dateNow.toLocaleString(),
+      });
     }
     setIsFavorite(!isFavorite);
   }, [isFavorite, favorites]);

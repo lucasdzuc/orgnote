@@ -1,6 +1,8 @@
 import React, { createContext, useState, useEffect, useCallback, useMemo } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
+import useLogOrg from '../hooks/useLogOrg';
+
 interface Favority {
   id: number;
   name: string;
@@ -8,6 +10,7 @@ interface Favority {
   avatar_url?: string;
   html_url?: string;
   isFavorite?: boolean;
+  addedIn?: string;
 }
 
 interface FavotityContext {
@@ -18,9 +21,15 @@ interface FavotityContext {
   clearFavorites(): void;
 }
 
+interface PropsLog {
+  addOrgLog(item: Favority): void;
+}
+
 const FavoritesContext = createContext<FavotityContext | null>({} as FavotityContext);
 
-export const FavoritesProvider: React.FC = ({ children }) => {
+export const FavoritesProvider: React.FC<PropsLog> = ({ children }) => {
+
+  const { addOrgLog } = useLogOrg();
 
   const [favorites, setFavorites] = useState<Favority[]>([]);
   const [loading, setLoading] = useState(true);
@@ -47,10 +56,12 @@ export const FavoritesProvider: React.FC = ({ children }) => {
   const addOrgFavorites = useCallback(async (favority: Favority) => {
     try {
       
-      const newFavorites = [...favorites, {...favority}]
+      const newFavorites = [...favorites, {...favority}];
 
       setFavorites(newFavorites);
       await AsyncStorage.setItem('@OrgNote:favorites', JSON.stringify(newFavorites));
+
+      // addOrgLog(favority);
 
     } catch (error) {
       console.log(error);

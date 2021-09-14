@@ -1,12 +1,13 @@
 import React, { useState, useEffect, useCallback, useMemo } from 'react';
-import { View, Text, TextInput, Image, Linking, Alert } from 'react-native';
+import { View, Text, TextInput, Image, Linking, Alert, TouchableOpacity } from 'react-native';
+// import { useNavigation } from '@react-navigation/native';
 
 // IMPORT HOOK OF BAG
 import useFavorites from '../../hooks/useFavorites';
 
 // IMPORT COMPONENTS
 import SearchFavorites from '../../components/SearchFavorites';
-import Dashboard from '../../components/Dashboard';
+// import Dashboard from '../../components/Dashboard';
 
 // IMPORT ICONS
 import SalvoBrancoIcon from '../../assets/icons/salvo_branco.svg';
@@ -50,6 +51,8 @@ interface OrganizationsFavorites {
 }
 
 const Favorites: React.FC = () => {
+
+  // const navigation = useNavigation();
 
   const { favorites, removeOrgFavorites } = useFavorites();
 
@@ -99,7 +102,11 @@ const Favorites: React.FC = () => {
 
   const handleClearInput = () => {
     setSearchFavority(''), filterFavorites;
-  }
+  };
+
+  // const handleNavigateLog = useCallback(() => {
+  //   navigation.navigate('LogOrg');
+  // }, []);
 
   return (
     <Container>
@@ -120,9 +127,17 @@ const Favorites: React.FC = () => {
                 placeholder="Procurar suas organizações salvas..."
                 handleClearInput={handleClearInput}
               />
-              {searchFavority.length == 0 && (
+              {/* {searchFavority.length == 0 && (
                 <Dashboard />
-              )}
+              )} */}
+              {/* <View style={{ flex: 1 }}>
+                <TouchableOpacity 
+                  onPress={handleNavigateLog} 
+                  style={{ flex: 1, height: 56, backgroundColor: '#C4C4C4', justifyContent: 'center', alignContent: 'center' }} 
+                  activeOpacity={0.9}>
+                  <Text style={{ textAlign: 'center' }}>Acessar Log's</Text>
+                </TouchableOpacity>
+              </View> */}
             </HeaderContainerList>
           }
           ListHeaderComponentStyle={{

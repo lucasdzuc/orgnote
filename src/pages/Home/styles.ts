@@ -193,6 +193,21 @@ export const ButtonTheme = styled.TouchableOpacity`
   align-items: center;
 `;
 
+export const BurronLog = styled.TouchableOpacity`
+  height: 48px;
+  margin-right: 16px;
+  padding: 0px 16px;
+  border-radius: 50px;
+  background: ${props => props.theme.colors.secondary};
+  justify-content: center;
+  align-items: center;
+`;
+
+export const TextBurronLog = styled.Text`
+  font-family: 'arimoregular';
+  font-size: 16px;
+  color: ${props => props.theme.colors.text};
+`;
 
 export const ButtonNavigateFavority = styled.TouchableOpacity`
   /* flex: 1; */

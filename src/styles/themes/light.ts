@@ -23,7 +23,9 @@ export default {
 
     emptytext: '#000',
 
-    carddash: '#FFF'
+    carddash: '#FFF',
+
+    cardlog: '#ebebeb',
   },
 
 };

@@ -7,7 +7,9 @@ import Icon from 'react-native-vector-icons/Feather';
 
 // import api from '../../services/api';
 
+// IMPORT HOOKS
 import useFavorites from '../../hooks/useFavorites';
+import useLogOrg from '../../hooks/useLogOrg';
 
 import { 
   Container,
@@ -33,6 +35,8 @@ import {
   TextButtonSaveFavorityOrg,
   FloatingButton,
   ButtonTheme,
+  BurronLog,
+  TextBurronLog,
   ButtonNavigateFavority,
   TextButtonNavigate,
   IconSetaDireitaBranco,
@@ -45,6 +49,7 @@ interface Organizations {
   avatar_url?: string;
   html_url?: string;
   isFavorite?: boolean;
+  addedIn?: string;
 }
 
 interface PropsTheme {
@@ -56,6 +61,7 @@ const Home: React.FC<PropsTheme> = ({ toggleTheme }) => {
   const { colors, title } = useContext(ThemeContext);
 
   const { addOrgFavorites, removeOrgFavorites, favorites } = useFavorites();
+  const { addOrgLog } = useLogOrg();
 
   const navigation = useNavigation();
 
@@ -67,14 +73,16 @@ const Home: React.FC<PropsTheme> = ({ toggleTheme }) => {
       try {
         const response = await axios.get(`https://api.github.com/orgs/Microsoft`);
         // const response = await axios.get(`https://api.github.com/organizations`);
-        // console.log(response.data);
         const equalsOrg = favorites.find(org => org.id === response.data.id);
+
+        const dateNow = new Date();
 
         setOrganizations(
           [response.data].map((item) => ({
             ...item,
             name: item.login,
             isFavorite: equalsOrg ? true : false,
+            addedIn: dateNow.toLocaleString(),
           }))
         );
         setIsFavorite(equalsOrg ? true : false);
@@ -93,24 +101,36 @@ const Home: React.FC<PropsTheme> = ({ toggleTheme }) => {
     navigation.navigate('Search');
   }, []);
 
+  const handleNavigateLog = useCallback(() => {
+    navigation.navigate('LogOrg');
+  }, []);
+
   const handleNavigateFavorities = useCallback(() => {
     navigation.navigate('Favorites');
   }, []);
 
   const toggleFavorite = useCallback((org) => {
     const favorityExists = favorites.find(p => p.id === org.id);
+    const dateNow = new Date();
+
     if (favorityExists) {
       removeOrgFavorites(org.id);
     } else {
       addOrgFavorites({
         ...org,
-        isFavorite: true
+        isFavorite: true,
+        addedIn: dateNow.toLocaleString(),
       }
         // [org].map((item) => ({
         //   ...item,
         //   isFavorite: true
         // }))
       );
+      addOrgLog({
+        ...org,
+        isFavorite: true,
+        addedIn: dateNow.toLocaleString(),
+      });
     }
     setIsFavorite(!isFavorite);
   }, [isFavorite, favorites]);
@@ -157,8 +177,13 @@ const Home: React.FC<PropsTheme> = ({ toggleTheme }) => {
 
       <FloatingButton>
         <ButtonTheme onPress={toggleTheme} activeOpacity={0.7}>
-          <Icon name={title === 'light' ? 'moon' : 'sun'} size={24} color={title === 'light' ? "#000" : "#2196f3" } />
+          <Icon name={title === 'light' ? 'moon' : 'sun'} size={24} color={title === 'light' ? "#000" : "#2196f3"} />
         </ButtonTheme>
+
+        <BurronLog onPress={handleNavigateLog} activeOpacity={0.8}>
+          {/* <TextBurronLog>LOG</TextBurronLog> */}
+          <Icon name="archive" size={22} color={title === 'light' ? "#222" : "#FAFAFA" } />
+        </BurronLog>
 
         <ButtonNavigateFavority onPress={handleNavigateFavorities} activeOpacity={0.7}>
           <TextButtonNavigate>Ver salvos</TextButtonNavigate>

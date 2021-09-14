@@ -32,6 +32,8 @@ declare module 'styled-components' {
       emptytext: string,
 
       carddash: string,
+
+      cardlog: string,
     };
 
   }

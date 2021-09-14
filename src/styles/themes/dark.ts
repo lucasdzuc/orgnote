@@ -24,6 +24,8 @@ export default {
     emptytext: '#969696',
 
     carddash: '#222',
+
+    cardlog: '#222',
   },
 };
 

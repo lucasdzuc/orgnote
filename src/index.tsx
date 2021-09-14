@@ -4,7 +4,7 @@ import { View, StatusBar, ActivityIndicator, LogBox } from 'react-native';
 import { ThemeProvider, DefaultTheme } from 'styled-components';
 import { useFonts } from 'expo-font';
 import AppLoading from 'expo-app-loading'
-import usePersistedState from './utils/usePersistedState';
+// import usePersistedState from './utils/usePersistedState';
 
 import light from './styles/themes/light';
 import dark from './styles/themes/dark';
@@ -12,6 +12,7 @@ import dark from './styles/themes/dark';
 import Routes from './routes';
 
 import { FavoritesProvider } from './contexts/favorites';
+import { LogOrgProvider } from './contexts/orglog';
 
 import useFavorites from './hooks/useFavorites';
 
@@ -47,8 +48,10 @@ const AppMobile: React.FC = () => {
     <ThemeProvider theme={theme}>
       <View style={{ flex: 1, backgroundColor: theme?.title === 'light' ? "#FAFAFA" : "#000000" }}>
         <FavoritesProvider>
-          <StatusBar barStyle={theme?.title === 'light' ? "dark-content" : "light-content"} backgroundColor="transparent" translucent />
-          <Routes toggleTheme={toggleTheme} />
+          <LogOrgProvider>
+            <StatusBar barStyle={theme?.title === 'light' ? "dark-content" : "light-content"} backgroundColor="transparent" translucent />
+            <Routes toggleTheme={toggleTheme} />
+          </LogOrgProvider>
         </FavoritesProvider>
       </View>
     </ThemeProvider>
