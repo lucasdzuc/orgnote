@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useCallback, useRef } from 'react';
 import { View, Text, ScrollView, Image, Alert, TextInputProps } from 'react-native';
-import axios from 'axios';
+// import axios from 'axios';
 
 // IMPORT API SERVER
 import api from '../../services/api';
@@ -127,13 +127,14 @@ const Search: React.FC = () => {
 
         const existOrgFavority = favorites.find(f => f.id === response.data.id);
 
-        const dateNow = new Date();
+        // const dateNow = new Date();
+        // const beforeDateNow = dateNow.toLocaleString();
         
         setOrganizations(
           [response.data].map((item: Organizations) => ({
             ...item,
             isFavorite: existOrgFavority ? true : false,
-            addedIn: dateNow.toLocaleString(),
+            // addedIn: beforeDateNow,
           }))
         );
         
@@ -158,13 +159,15 @@ const Search: React.FC = () => {
   const toggleFavorite = useCallback((org) => {
     const favorityExists = favorites.find(p => p.id === org.id);
     const dateNow = new Date();
+    // const beforeDateNow = dateNow.toLocaleString();
+
     if (favorityExists) {
       removeOrgFavorites(org.id);
     } else {
       addOrgFavorites({
         ...org,
         isFavorite: true,
-        addedIn: dateNow.toLocaleString(),
+        addedIn: dateNow,
       }
         // [org].map((item) => ({
         //   ...item,
@@ -174,7 +177,7 @@ const Search: React.FC = () => {
       addOrgLog({
         ...org,
         isFavorite: true,
-        addedIn: dateNow.toLocaleString(),
+        addedIn: dateNow,
       });
     }
     setIsFavorite(!isFavorite);

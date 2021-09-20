@@ -194,9 +194,10 @@ export const ButtonTheme = styled.TouchableOpacity`
 `;
 
 export const BurronLog = styled.TouchableOpacity`
+  width: 48px;
   height: 48px;
   margin-right: 16px;
-  padding: 0px 16px;
+  /* padding: 0px 16px; */
   border-radius: 50px;
   background: ${props => props.theme.colors.secondary};
   justify-content: center;

@@ -49,7 +49,7 @@ interface Organizations {
   avatar_url?: string;
   html_url?: string;
   isFavorite?: boolean;
-  addedIn?: string;
+  addedIn?: any;
 }
 
 interface PropsTheme {
@@ -74,15 +74,14 @@ const Home: React.FC<PropsTheme> = ({ toggleTheme }) => {
         const response = await axios.get(`https://api.github.com/orgs/Microsoft`);
         // const response = await axios.get(`https://api.github.com/organizations`);
         const equalsOrg = favorites.find(org => org.id === response.data.id);
-
-        const dateNow = new Date();
+        // const dateNow = new Date();
 
         setOrganizations(
           [response.data].map((item) => ({
             ...item,
             name: item.login,
             isFavorite: equalsOrg ? true : false,
-            addedIn: dateNow.toLocaleString(),
+            // addedIn: dateNow.toLocaleString(),
           }))
         );
         setIsFavorite(equalsOrg ? true : false);
@@ -112,6 +111,7 @@ const Home: React.FC<PropsTheme> = ({ toggleTheme }) => {
   const toggleFavorite = useCallback((org) => {
     const favorityExists = favorites.find(p => p.id === org.id);
     const dateNow = new Date();
+    // const beforeDateNow = dateNow.toLocaleString();
 
     if (favorityExists) {
       removeOrgFavorites(org.id);
@@ -119,7 +119,7 @@ const Home: React.FC<PropsTheme> = ({ toggleTheme }) => {
       addOrgFavorites({
         ...org,
         isFavorite: true,
-        addedIn: dateNow.toLocaleString(),
+        addedIn: dateNow,
       }
         // [org].map((item) => ({
         //   ...item,
@@ -129,7 +129,7 @@ const Home: React.FC<PropsTheme> = ({ toggleTheme }) => {
       addOrgLog({
         ...org,
         isFavorite: true,
-        addedIn: dateNow.toLocaleString(),
+        addedIn: dateNow,
       });
     }
     setIsFavorite(!isFavorite);

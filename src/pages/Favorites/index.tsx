@@ -48,6 +48,7 @@ interface OrganizationsFavorites {
   avatar_url?: string;
   html_url?: string;
   isFavorite: boolean;
+  addedIn?: string;
 }
 
 const Favorites: React.FC = () => {

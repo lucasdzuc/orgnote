@@ -7,7 +7,7 @@ interface Favority {
   id: number;
   name?: string;
   html_url?: string;
-  addedIn?: string;
+  addedIn?: any;
   idLog?: number;
 }
 

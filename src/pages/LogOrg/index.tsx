@@ -4,6 +4,9 @@ import { View, Text } from 'react-native';
 // IMPORT HOOKS
 import useLogOrg from '../../hooks/useLogOrg';
 
+// IMPORT HOOKS FUNCTIONS
+import formatDate from '../../utils/formatDate';
+
 import {
   ContainerScrollView,
   Header,
@@ -40,7 +43,8 @@ const LogOrg: React.FC = () => {
         {logOrg.reverse().map(log => (
           <CardLog key={log.idLog}>
             <DateCardLog>{log.name}</DateCardLog>
-            <NameCardLog>{log.addedIn}</NameCardLog>
+            <NameCardLog>{formatDate("2021-09-19T14:46:26")}</NameCardLog>
+            {/* <NameCardLog>{log.addedIn}</NameCardLog> */}
           </CardLog>
         ))}
       </>

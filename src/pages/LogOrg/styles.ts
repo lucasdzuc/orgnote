@@ -1,4 +1,6 @@
 import styled from 'styled-components/native';
+import { Platform } from 'react-native';
+import { getStatusBarHeight } from 'react-native-iphone-x-helper';
 
 export const ContainerScrollView = styled.ScrollView`
   flex: 1;
@@ -40,6 +42,7 @@ export const DateCardLog = styled.Text`
 
 export const CardEmptyStateScreen = styled.View`
   flex: 1;
+  padding-top: ${Platform.OS === 'ios' ? getStatusBarHeight() + 40 : 64}px;
   justify-content: center;
   align-items: center;
 `;
