@@ -43,8 +43,9 @@ const LogOrg: React.FC = () => {
         {logOrg.reverse().map(log => (
           <CardLog key={log.idLog}>
             <DateCardLog>{log.name}</DateCardLog>
-            <NameCardLog>{formatDate("2021-09-19T14:46:26")}</NameCardLog>
-            {/* <NameCardLog>{log.addedIn}</NameCardLog> */}
+            {/* <NameCardLog>{formatDate(log.addedIn)}</NameCardLog> */}
+            {/* <NameCardLog>{formatDate("2021-09-19T14:46:26")}</NameCardLog> */}
+            <NameCardLog>{log.addedIn}</NameCardLog>
           </CardLog>
         ))}
       </>

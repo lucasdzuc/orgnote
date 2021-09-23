@@ -158,7 +158,7 @@ const Search: React.FC = () => {
 
   const toggleFavorite = useCallback((org) => {
     const favorityExists = favorites.find(p => p.id === org.id);
-    const dateNow = new Date();
+    const dateNow = new Date().toLocaleString();
     // const beforeDateNow = dateNow.toLocaleString();
 
     if (favorityExists) {
@@ -168,12 +168,7 @@ const Search: React.FC = () => {
         ...org,
         isFavorite: true,
         addedIn: dateNow,
-      }
-        // [org].map((item) => ({
-        //   ...item,
-        //   isFavorite: true
-        // }))
-      );
+      });
       addOrgLog({
         ...org,
         isFavorite: true,
