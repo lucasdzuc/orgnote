@@ -9,7 +9,8 @@ export const Container = styled.View<ContainerProps>`
   /* flex: 1; */
   width: 100%;
   height: 60px;
-  padding: 0px 0px 0px 24px;
+  /* padding: 0px 0px 0px 0px; */
+  padding: 0px 24px;
   background: ${props => props.theme.colors.searchinput};
   border-radius: 14px;
   border-width: 2px;
@@ -45,3 +46,17 @@ export const Icon = styled(FeatherIcon)`
 `;
 
 export const ButtonSearch = styled.TouchableOpacity``;
+
+export const ButtonFilterOrg = styled.TouchableOpacity`
+  /* width: 32px; */
+  height: 40px;
+  /* background: red; */
+  justify-content: center;
+  align-items: center;
+`;
+
+export const FilterIcon = styled(FeatherIcon)`
+  font-size: 24px;
+  /* color: blue; */
+  color: ${props => props.theme.colors.text};
+`;

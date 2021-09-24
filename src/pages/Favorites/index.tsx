@@ -1,6 +1,8 @@
-import React, { useState, useEffect, useCallback, useMemo } from 'react';
+import React, { useState, useEffect, useCallback, useMemo, useRef } from 'react';
 import { View, Text, TextInput, Image, Linking, Alert, TouchableOpacity } from 'react-native';
 // import { useNavigation } from '@react-navigation/native';
+import { Portal } from 'react-native-portalize';
+import { Modalize } from 'react-native-modalize';
 
 // IMPORT HOOK OF BAG
 import useFavorites from '../../hooks/useFavorites';
@@ -39,6 +41,12 @@ import {
   TextButtonSaveFavorityOrg,
   MessageNotFoundOrg,
   TextMessageNotFoundOrg,
+  ContainerModalize,
+  HeaderModalize,
+  TitleHeaderModalize,
+  ContainerButtonCloseModalModilize,
+  ButtonCloseModalModalize,
+  TextButtonCloseModilize,
 } from './styles';
 
 interface OrganizationsFavorites {
@@ -53,6 +61,8 @@ interface OrganizationsFavorites {
 
 const Favorites: React.FC = () => {
 
+  const modalizeRef = useRef<Modalize>(null);
+
   // const navigation = useNavigation();
 
   const { favorites, removeOrgFavorites } = useFavorites();
@@ -66,7 +76,7 @@ const Favorites: React.FC = () => {
 
   // FILTER FAVORITES
   const filterFavorites = useMemo(() => {
-    const lowerSearch = searchFavority.toLowerCase(searchFavority);
+    const lowerSearch = searchFavority?.toLowerCase(searchFavority);
     return favorites.filter(({ name }) => name?.toLowerCase().includes(lowerSearch));
   }, [searchFavority, favorites]);
 
@@ -105,9 +115,23 @@ const Favorites: React.FC = () => {
     setSearchFavority(''), filterFavorites;
   };
 
+  const handleOpenModalFilter = () => {
+    modalizeRef.current?.open();
+  }
+  
+  const closeModal = () => {
+    // setIdPost();
+    modalizeRef.current?.close();
+  };
+  
+  // const handleFilterOrgDate = useCallback((value: string) => {
+  //   const filterOrg = filterFavorites.filter(({ addedIn }) => addedIn == value);
+  // }, [filterFavorites]);
+
   // const handleNavigateLog = useCallback(() => {
   //   navigation.navigate('LogOrg');
   // }, []);
+
 
   return (
     <Container>
@@ -127,6 +151,7 @@ const Favorites: React.FC = () => {
                 onChangeText={setSearchFavority}
                 placeholder="Procurar suas organizações salvas..."
                 handleClearInput={handleClearInput}
+                handleOpenModalFilter={handleOpenModalFilter}
               />
               {/* {searchFavority.length == 0 && (
                 <Dashboard />
@@ -158,7 +183,7 @@ const Favorites: React.FC = () => {
           ListFooterComponentStyle={{
             height: 80,
           }}
-          renderItem={({ item }) => (
+          renderItem={({ item }: any) => (
             filterFavorites.length > 0 && (
               <Org>
                 <OrgInternContainer>
@@ -194,6 +219,31 @@ const Favorites: React.FC = () => {
           </TextInfo>
         </Info>
       )}
+
+      <Portal>  
+        <Modalize
+          ref={modalizeRef}
+          snapPoint={320}
+          modalHeight={320}
+          handlePosition="inside"
+          HeaderComponent={
+            <HeaderModalize>
+              <TitleHeaderModalize>FILTRAR</TitleHeaderModalize>
+            </HeaderModalize>
+          }
+          FooterComponent={
+            <ContainerButtonCloseModalModilize>
+              <ButtonCloseModalModalize onPress={closeModal} activeOpacity={0.7} >
+                <TextButtonCloseModilize>Cancelar</TextButtonCloseModilize>
+              </ButtonCloseModalModalize>
+            </ContainerButtonCloseModalModilize>
+          }
+        >
+          <ContainerModalize>
+            <Text style={{ textAlign: 'center' }}>Filtre por data</Text>
+          </ContainerModalize>
+        </Modalize>
+      </Portal>
     </Container>
   );
 }

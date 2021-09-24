@@ -5,6 +5,7 @@ import { ThemeProvider, DefaultTheme } from 'styled-components';
 import { useFonts } from 'expo-font';
 import AppLoading from 'expo-app-loading'
 // import usePersistedState from './utils/usePersistedState';
+import { Host } from 'react-native-portalize';
 
 import light from './styles/themes/light';
 import dark from './styles/themes/dark';
@@ -45,16 +46,18 @@ const AppMobile: React.FC = () => {
   };
 
   return (
-    <ThemeProvider theme={theme}>
-      <View style={{ flex: 1, backgroundColor: theme?.title === 'light' ? "#FAFAFA" : "#000000" }}>
-        <FavoritesProvider>
-          <LogOrgProvider>
-            <StatusBar barStyle={theme?.title === 'light' ? "dark-content" : "light-content"} backgroundColor="transparent" translucent />
-            <Routes toggleTheme={toggleTheme} />
-          </LogOrgProvider>
-        </FavoritesProvider>
-      </View>
-    </ThemeProvider>
+    <Host>
+      <ThemeProvider theme={theme}>
+        <View style={{ flex: 1, backgroundColor: theme?.title === 'light' ? "#FAFAFA" : "#000000" }}>
+          <FavoritesProvider>
+            <LogOrgProvider>
+              <StatusBar barStyle={theme?.title === 'light' ? "dark-content" : "light-content"} backgroundColor="transparent" translucent />
+              <Routes toggleTheme={toggleTheme} />
+            </LogOrgProvider>
+          </FavoritesProvider>
+        </View>
+      </ThemeProvider>
+    </Host>
   );
 };
 

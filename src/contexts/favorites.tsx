@@ -21,15 +21,15 @@ interface FavotityContext {
   clearFavorites(): void;
 }
 
-interface PropsLog {
-  addOrgLog(item: Favority): void;
-}
+// interface PropsLog {
+//   addOrgLog(item: Favority): void;
+// }
 
 const FavoritesContext = createContext<FavotityContext | null>({} as FavotityContext);
 
-export const FavoritesProvider: React.FC<PropsLog> = ({ children }) => {
+export const FavoritesProvider: React.FC = ({ children }) => {
 
-  const { addOrgLog } = useLogOrg();
+  // const { addOrgLog } = useLogOrg();
 
   const [favorites, setFavorites] = useState<Favority[]>([]);
   const [loading, setLoading] = useState(true);
