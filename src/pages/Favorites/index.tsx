@@ -1,6 +1,8 @@
 import React, { useState, useEffect, useCallback, useMemo, useRef } from 'react';
 import { View, Text, TextInput, Image, Linking, Alert, TouchableOpacity } from 'react-native';
 // import { useNavigation } from '@react-navigation/native';
+import IconFeather from 'react-native-vector-icons/Feather';
+import IconAntDesign from 'react-native-vector-icons/AntDesign';
 import { Portal } from 'react-native-portalize';
 import { Modalize } from 'react-native-modalize';
 
@@ -47,6 +49,10 @@ import {
   ContainerButtonCloseModalModilize,
   ButtonCloseModalModalize,
   TextButtonCloseModilize,
+  ContentOrdernation,
+  ButtonOrdernation,
+  ContentIconOrdernation,
+  TextButtonOrdernation,
 } from './styles';
 
 interface OrganizationsFavorites {
@@ -168,7 +174,7 @@ const Favorites: React.FC = () => {
           }
           ListHeaderComponentStyle={{
             paddingHorizontal: 0,
-            paddingBottom: 8,
+            paddingBottom: 16,
           }}
           ListFooterComponent={
             searchFavority.length > 0 && filterFavorites.length === 0 ? (
@@ -228,7 +234,7 @@ const Favorites: React.FC = () => {
           handlePosition="inside"
           HeaderComponent={
             <HeaderModalize>
-              <TitleHeaderModalize>FILTRAR</TitleHeaderModalize>
+              <TitleHeaderModalize>Ordenar por</TitleHeaderModalize>
             </HeaderModalize>
           }
           FooterComponent={
@@ -240,7 +246,32 @@ const Favorites: React.FC = () => {
           }
         >
           <ContainerModalize>
-            <Text style={{ textAlign: 'center' }}>Filtre por data</Text>
+            {/* <Text style={{ textAlign: 'center' }}>Ordernar por data</Text> */}
+            <ContentOrdernation>
+
+              <ButtonOrdernation onPress={() => {}} activeOpacity={1}>
+                <ContentIconOrdernation>
+                  <IconAntDesign name="swap" size={32} color="#939393" />
+                </ContentIconOrdernation>
+                <TextButtonOrdernation>Ordenação{'\n'}padrão</TextButtonOrdernation>
+              </ButtonOrdernation>
+              
+              <ButtonOrdernation onPress={() => {}} activeOpacity={1}>
+                <ContentIconOrdernation>
+                  <IconAntDesign name="clockcircleo" size={32} color="#939393" />
+                </ContentIconOrdernation>
+                <TextButtonOrdernation>Hoje</TextButtonOrdernation>
+              </ButtonOrdernation>
+
+              <ButtonOrdernation onPress={() => {}} activeOpacity={1}>
+                <ContentIconOrdernation>
+                  <IconAntDesign name="calendar" size={32} color="#939393" />
+                </ContentIconOrdernation>
+                <TextButtonOrdernation>Data</TextButtonOrdernation>
+              </ButtonOrdernation>
+
+            </ContentOrdernation>
+
           </ContainerModalize>
         </Modalize>
       </Portal>

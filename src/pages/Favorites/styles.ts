@@ -177,7 +177,7 @@ export const HeaderModalize = styled.View`
 `;
 
 export const TitleHeaderModalize = styled.Text`
-  font-size: 15px;
+  font-size: 16px;
   color: #2196f3;
   font-weight: 700;
 `;
@@ -206,4 +206,34 @@ export const TextButtonCloseModilize = styled.Text`
     font-weight: 700;
     color: #464646;
   /* padding: 24px 0px; */
+`;
+
+export const ContentOrdernation = styled.View`
+  flex: 1;
+  flex-direction: row;
+  justify-content: space-around;
+`;
+
+export const ButtonOrdernation = styled.TouchableOpacity`
+  /* background: lightblue; */
+  align-items: center;
+`;
+
+export const ContentIconOrdernation = styled.View`
+  /* flex: 1; */
+  width: 72px;
+  height: 72px;
+  border-width: 1px;
+  border-color: #939393;
+  border-radius: 100px;
+  justify-content: center;
+  align-items: center;
+`;
+
+export const TextButtonOrdernation = styled.Text`
+  font-family: 'arimoregular';
+  font-size: 15px;
+  color: #939393;
+  text-align: center;
+  padding-top: 8px;
 `;
