@@ -110,9 +110,8 @@ const Home: React.FC<PropsTheme> = ({ toggleTheme }) => {
 
   const toggleFavorite = useCallback((org) => {
     const favorityExists = favorites.find(p => p.id === org.id);
-    const dateNow = new Date().toLocaleDateString();
+    const dateNow = new Date();
     // const beforeDateNow = dateNow.toLocaleString();
-    console.log(dateNow);
 
     if (favorityExists) {
       removeOrgFavorites(org.id);
