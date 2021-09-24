@@ -52,7 +52,7 @@ const SearchInput: React.FC<InputProps> = ({ value = '', handleClearInput, handl
         {...rest}
       />
 
-      {/* {Platform.OS !== 'ios' && 
+      {Platform.OS !== 'ios' && 
         value.length > 0 && (
         <ButtonClearInput onPress={handleClearInput} activeOpacity={0.6} >
           <Icon
@@ -61,7 +61,8 @@ const SearchInput: React.FC<InputProps> = ({ value = '', handleClearInput, handl
             color={isFocused || isFilled ? '#2196f3' : '#e9bbbb'}
           />
         </ButtonClearInput>
-      )} */}
+        )
+      }
 
       <ButtonFilterOrg onPress={handleOpenModalFilter} activeOpacity={0.7} >
         <FilterIcon name="sliders" />

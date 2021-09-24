@@ -9,8 +9,8 @@ export const Container = styled.View<ContainerProps>`
   /* flex: 1; */
   width: 100%;
   height: 60px;
-  /* padding: 0px 0px 0px 0px; */
-  padding: 0px 24px;
+  padding: 0px 8px 0px 24px;
+  /* padding: 0px 24px; */
   background: ${props => props.theme.colors.searchinput};
   border-radius: 14px;
   border-width: 2px;
@@ -37,19 +37,29 @@ export const TextInput = styled.TextInput`
   font-family: 'arimoregular';
   font-size: 16px;
   color: ${props => props.theme.colors.searchtextvalue};
+  flex-wrap: wrap;
 `;
 
-export const ButtonClearInput = styled.TouchableOpacity``;
+export const ButtonClearInput = styled.TouchableOpacity`
+  width: 40px;
+  height: 40px;
+  /* background: red; */
+  justify-content: center;
+  align-items: center;
+`;
 
 export const Icon = styled(FeatherIcon)`
-  margin: 0px 24px;
+  /* margin: 0px 16px; */
 `;
 
 export const ButtonSearch = styled.TouchableOpacity``;
 
 export const ButtonFilterOrg = styled.TouchableOpacity`
   /* width: 32px; */
+  width: 40px;
   height: 40px;
+  margin: 0px 8px 0px 0px;
+  /* padding: 0px 16px 0px 16px; */
   /* background: red; */
   justify-content: center;
   align-items: center;
@@ -57,6 +67,5 @@ export const ButtonFilterOrg = styled.TouchableOpacity`
 
 export const FilterIcon = styled(FeatherIcon)`
   font-size: 24px;
-  /* color: blue; */
   color: ${props => props.theme.colors.text};
 `;
