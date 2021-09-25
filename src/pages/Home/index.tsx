@@ -35,8 +35,8 @@ import {
   TextButtonSaveFavorityOrg,
   FloatingButton,
   ButtonTheme,
-  BurronLog,
-  TextBurronLog,
+  ButtonLog,
+  TextButtonLog,
   ButtonNavigateFavority,
   TextButtonNavigate,
   IconSetaDireitaBranco,
@@ -104,6 +104,10 @@ const Home: React.FC<PropsTheme> = ({ toggleTheme }) => {
     navigation.navigate('LogOrg');
   }, []);
 
+  const handleNavigateSettings = useCallback(() => {
+    navigation.navigate('Settings');
+  }, []);
+  
   const handleNavigateFavorities = useCallback(() => {
     navigation.navigate('Favorites');
   }, []);
@@ -175,10 +179,9 @@ const Home: React.FC<PropsTheme> = ({ toggleTheme }) => {
           <Icon name={title === 'light' ? 'moon' : 'sun'} size={24} color={title === 'light' ? "#000" : "#2196f3"} />
         </ButtonTheme>
 
-        <BurronLog onPress={handleNavigateLog} activeOpacity={0.8}>
-          {/* <TextBurronLog>LOG</TextBurronLog> */}
-          <Icon name="archive" size={22} color={title === 'light' ? "#222" : "#FAFAFA" } />
-        </BurronLog>
+        <ButtonLog onPress={handleNavigateSettings} activeOpacity={0.8}>
+          <Icon name="settings" size={22} color={title === 'light' ? "#222" : "#FAFAFA" } />
+        </ButtonLog>
 
         <ButtonNavigateFavority onPress={handleNavigateFavorities} activeOpacity={0.7}>
           <TextButtonNavigate>Ver salvos</TextButtonNavigate>

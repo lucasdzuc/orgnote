@@ -193,7 +193,7 @@ export const ButtonTheme = styled.TouchableOpacity`
   align-items: center;
 `;
 
-export const BurronLog = styled.TouchableOpacity`
+export const ButtonLog = styled.TouchableOpacity`
   width: 48px;
   height: 48px;
   margin-right: 16px;
@@ -204,7 +204,7 @@ export const BurronLog = styled.TouchableOpacity`
   align-items: center;
 `;
 
-export const TextBurronLog = styled.Text`
+export const TextButtonLog = styled.Text`
   font-family: 'arimoregular';
   font-size: 16px;
   color: ${props => props.theme.colors.text};

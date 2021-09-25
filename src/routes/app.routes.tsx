@@ -15,6 +15,7 @@ import Home from '../pages/Home';
 import Search from '../pages/Search';
 import Favorites from '../pages/Favorites';
 import LogOrg from '../pages/LogOrg';
+import Settings from '../pages/Settings';
 
 // IMPORT COMPONENTS
 // import Header from '../components/Header';
@@ -28,27 +29,29 @@ interface PropsTheme {
 const AppRoutes: React.FC<PropsTheme> = ({ toggleTheme }) => {
 
   const { title } = useContext(ThemeContext);
-  
+
   const { clearFavorites, favorites } = useFavorites();
   const { clearOrgLog } = useLogOrg();
-  
+
   const clearAllFavorites = useCallback(() => {
     Alert.alert(
-      "Deseja realmente excluir todas as suas organizações salvas?", 
+      "Deseja realmente excluir todas as suas organizações salvas?",
       "Ao excluir suas organizações salvas todos os dados serão removidos da lista.",
-    [
-      {
-        text: "Cancelar",
-        onPress: () => {}, // console.log("Cancel Pressed"),
-        style: "cancel"
-      },
-      { text: "OK", onPress: () => {
-        try {
-            clearFavorites();
-          } catch (error) {
-            console.log(error);
+      [
+        {
+          text: "Cancelar",
+          onPress: () => { }, // console.log("Cancel Pressed"),
+          style: "cancel"
+        },
+        {
+          text: "OK", onPress: () => {
+            try {
+              clearFavorites();
+            } catch (error) {
+              console.log(error);
+            }
           }
-        }}
+        }
       ],
       { cancelable: false }
     );
@@ -56,21 +59,23 @@ const AppRoutes: React.FC<PropsTheme> = ({ toggleTheme }) => {
 
   const clearLog = useCallback(() => {
     Alert.alert(
-      "Limpar histórico?", 
+      "Limpar histórico?",
       "Ao limpar seu histórico não sera possível recupera-lo.",
-    [
-      {
-        text: "Cancelar",
-        onPress: () => {}, // console.log("Cancel Pressed"),
-        style: "cancel"
-      },
-      { text: "OK", onPress: () => {
-        try {
-            clearOrgLog();
-          } catch (error) {
-            console.log(error);
+      [
+        {
+          text: "Cancelar",
+          onPress: () => { }, // console.log("Cancel Pressed"),
+          style: "cancel"
+        },
+        {
+          text: "OK", onPress: () => {
+            try {
+              clearOrgLog();
+            } catch (error) {
+              console.log(error);
+            }
           }
-        }}
+        }
       ],
       { cancelable: false }
     );
@@ -82,8 +87,8 @@ const AppRoutes: React.FC<PropsTheme> = ({ toggleTheme }) => {
         initialRouteName="Home"
         screenOptions={{
           headerShown: true,
-          cardStyle: { 
-            backgroundColor: title === 'light' ? '#FAFAFA' : '#000', 
+          cardStyle: {
+            backgroundColor: title === 'light' ? '#FAFAFA' : '#000',
           },
         }}
       >
@@ -121,9 +126,9 @@ const AppRoutes: React.FC<PropsTheme> = ({ toggleTheme }) => {
             ),
             headerRight: () => (
               favorites.length > 0 && (
-                <Icon 
-                  name="trash" 
-                  size={20} 
+                <Icon
+                  name="trash"
+                  size={20}
                   color={title === 'light' ? "#000" : "#FAFAFA"}
                   style={{ paddingHorizontal: 24 }}
                   onPress={clearAllFavorites}
@@ -136,7 +141,49 @@ const AppRoutes: React.FC<PropsTheme> = ({ toggleTheme }) => {
             headerTitleStyle: {
               fontFamily: 'arimoregular',
               fontSize: 16,
-              color: title === 'light' ? '#000' : '#FAFAFA' ,
+              color: title === 'light' ? '#000' : '#FAFAFA',
+            },
+            headerStyle: {
+              backgroundColor: title === 'light' ? '#FAFAFA' : '#000',
+              elevation: 0,
+              borderWidth: 0,
+              shadowColor: 'transparent',
+            },
+            // headerRightContainerStyle: {
+            //   marginRight: 24,
+            // },
+          })}
+        />
+
+        <App.Screen
+          name="Settings"
+          component={Settings}
+          options={({ navigation }) => ({
+            headerLeft: () => (
+              <Icon
+                name="arrow-left"
+                size={24}
+                color={title === 'light' ? '#000' : '#FAFAFA'}
+                onPress={() => navigation.goBack()}
+                style={{ paddingHorizontal: 24 }}
+              />
+            ),
+            // headerRight: () => (
+            //   <Icon
+            //     name="trash"
+            //     size={20}
+            //     color={title === 'light' ? '#000' : '#FAFAFA'}
+            //     style={{ paddingHorizontal: 24 }}
+            //     // onPress={clearLog}
+            //   />
+            // ),
+            headerShown: true,
+            title: 'Configurações',
+            headerTitleAlign: 'center',
+            headerTitleStyle: {
+              fontFamily: 'arimoregular',
+              fontSize: 16,
+              color: title === 'light' ? '#000' : '#FAFAFA',
             },
             headerStyle: {
               backgroundColor: title === 'light' ? '#FAFAFA' : '#000',
@@ -164,9 +211,9 @@ const AppRoutes: React.FC<PropsTheme> = ({ toggleTheme }) => {
               />
             ),
             headerRight: () => (
-              <Icon 
-                name="trash" 
-                size={20} 
+              <Icon
+                name="trash"
+                size={20}
                 color={title === 'light' ? '#000' : '#FAFAFA'}
                 style={{ paddingHorizontal: 24 }}
                 onPress={clearLog}
@@ -178,7 +225,7 @@ const AppRoutes: React.FC<PropsTheme> = ({ toggleTheme }) => {
             headerTitleStyle: {
               fontFamily: 'arimoregular',
               fontSize: 16,
-              color: title === 'light' ? '#000' : '#FAFAFA' ,
+              color: title === 'light' ? '#000' : '#FAFAFA',
             },
             headerStyle: {
               backgroundColor: title === 'light' ? '#FAFAFA' : '#000',
