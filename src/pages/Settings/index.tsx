@@ -17,7 +17,7 @@ const Settings: React.FC = () => {
 
   const { colors, title } = useContext(ThemeContext);
 
-  const { clearOrgLog } = useLogOrg();
+  const { clearOrgLog, logOrg } = useLogOrg();
 
   const navigation = useNavigation();
 
@@ -49,6 +49,10 @@ const Settings: React.FC = () => {
     );
   }, []);
 
+  const handleAlert = () => {
+    Alert.alert("Seu histórico esta vazio!");
+  };
+
   return (
     <Container>
       {/* <Text>Configurações</Text> */}
@@ -60,7 +64,7 @@ const Settings: React.FC = () => {
           <TextButtonOptionSetting>Ver Histórico</TextButtonOptionSetting>
         </ButtonOptionSetting>
 
-        <ButtonOptionSetting onPress={clearLog} activeOpacity={0.7}>
+        <ButtonOptionSetting onPress={logOrg.length > 0 ? clearLog : handleAlert} activeOpacity={0.7}>
           <Icon name="trash" size={22} color={title === 'light' ? "#222" : "#FAFAFA" } />
           <TextButtonOptionSetting>Excluir histórico</TextButtonOptionSetting>
         </ButtonOptionSetting>
