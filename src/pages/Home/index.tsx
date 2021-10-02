@@ -112,6 +112,12 @@ const Home: React.FC<PropsTheme> = ({ toggleTheme }) => {
     navigation.navigate('Favorites');
   }, []);
 
+  function toLocal(date: Date) {
+    var local = new Date(date);
+    // local.setMinutes(date.getMinutes() - date.getTimezoneOffset());
+    return local.toJSON();
+  };
+
   const toggleFavorite = useCallback((org) => {
     const favorityExists = favorites.find(p => p.id === org.id);
     const dateNow = new Date();
@@ -123,12 +129,12 @@ const Home: React.FC<PropsTheme> = ({ toggleTheme }) => {
       addOrgFavorites({
         ...org,
         isFavorite: true,
-        addedIn: dateNow,
+        addedIn: toLocal(dateNow),
       });
       addOrgLog({
         ...org,
         isFavorite: true,
-        addedIn: dateNow,
+        addedIn: toLocal(dateNow),
       });
     }
     setIsFavorite(!isFavorite);

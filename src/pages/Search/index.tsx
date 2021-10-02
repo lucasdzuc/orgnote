@@ -156,6 +156,12 @@ const Search: React.FC = () => {
     }, 300)
   };
 
+  function toLocal(date: Date) {
+    var local = new Date(date);
+    // local.setMinutes(date.getMinutes() - date.getTimezoneOffset());
+    return local.toJSON();
+  };
+
   const toggleFavorite = useCallback((org) => {
     const favorityExists = favorites.find(p => p.id === org.id);
     const dateNow = new Date();
@@ -166,12 +172,12 @@ const Search: React.FC = () => {
       addOrgFavorites({
         ...org,
         isFavorite: true,
-        addedIn: dateNow,
+        addedIn: toLocal(dateNow),
       });
       addOrgLog({
         ...org,
         isFavorite: true,
-        addedIn: dateNow,
+        addedIn: toLocal(dateNow),
       });
     }
     setIsFavorite(!isFavorite);
