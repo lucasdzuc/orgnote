@@ -168,6 +168,8 @@ export const TextMessageNotFoundOrg = styled.Text`
 export const ContainerModalize = styled.View`
   flex: 1;
 `;
+  
+/* background: ${props => props.theme.colors.secondary}; */
 
 export const HeaderModalize = styled.View`
   padding: 32px 0px;
@@ -197,8 +199,11 @@ export const ButtonCloseModalModalize = styled.TouchableOpacity`
   justify-content: center;
   align-items: center;
   border-radius: 16px;
-  background: #f3f4f6;
 `;
+
+/* background-color: ${props => props.theme.colors.background}; */
+// background: ${props => props.theme.colors.primary};
+/* background: ${props => props.theme.colors.primary}; */
 
 export const TextButtonCloseModilize = styled.Text`
     /* font-family: 'gilroyregular'; */

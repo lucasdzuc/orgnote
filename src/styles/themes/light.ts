@@ -26,6 +26,9 @@ export default {
     carddash: '#FFF',
 
     cardlog: '#ebebeb',
+
+    buttonCancelModal: '#f3f4f6',
+    textButtonCancelModal: '#464646',
   },
 
 };

@@ -1,6 +1,7 @@
-import React, { useState, useEffect, useCallback, useMemo, useRef } from 'react';
+import React, { useState, useEffect, useCallback, useMemo, useRef, useContext } from 'react';
 import { View, Text, TextInput, Image, Linking, Alert, TouchableOpacity } from 'react-native';
 // import { useNavigation } from '@react-navigation/native';
+import { ThemeContext } from 'styled-components';
 import IconFeather from 'react-native-vector-icons/Feather';
 import IconAntDesign from 'react-native-vector-icons/AntDesign';
 import { Portal } from 'react-native-portalize';
@@ -66,6 +67,8 @@ interface OrganizationsFavorites {
 }
 
 const Favorites: React.FC = () => {
+
+  const { colors, title } = useContext(ThemeContext);
 
   const modalizeRef = useRef<Modalize>(null);
 
@@ -232,6 +235,9 @@ const Favorites: React.FC = () => {
           snapPoint={320}
           modalHeight={320}
           handlePosition="inside"
+          modalStyle={{
+            backgroundColor: colors.secondary,
+          }}
           HeaderComponent={
             <HeaderModalize>
               <TitleHeaderModalize>Ordenar por</TitleHeaderModalize>
@@ -239,8 +245,8 @@ const Favorites: React.FC = () => {
           }
           FooterComponent={
             <ContainerButtonCloseModalModilize>
-              <ButtonCloseModalModalize onPress={closeModal} activeOpacity={0.7} >
-                <TextButtonCloseModilize>Cancelar</TextButtonCloseModilize>
+              <ButtonCloseModalModalize onPress={closeModal} activeOpacity={0.7} style={{ backgroundColor: colors.buttonCancelModal }} >
+                <TextButtonCloseModilize style={{ color: colors.textButtonCancelModal }}>Cancelar</TextButtonCloseModilize>
               </ButtonCloseModalModalize>
             </ContainerButtonCloseModalModilize>
           }

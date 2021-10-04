@@ -34,6 +34,9 @@ declare module 'styled-components' {
       carddash: string,
 
       cardlog: string,
+
+      buttonCancelModal: string,
+      textButtonCancelModal: string,
     };
 
   }
