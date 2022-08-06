@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback, useRef, useContext } from 'react';
-import { View, Text, FlatList, Image, Alert } from 'react-native';
+// import { View, Text, FlatList, Image, Alert } from 'react-native';
 import { ThemeContext } from 'styled-components';
 import { useNavigation } from '@react-navigation/native';
 import axios from 'axios';
@@ -10,6 +10,7 @@ import Icon from 'react-native-vector-icons/Feather';
 // IMPORT HOOKS
 import useFavorites from '../../hooks/useFavorites';
 import useLogOrg from '../../hooks/useLogOrg';
+import useTheme from '../../hooks/useTheme';
 
 import { 
   Container,
@@ -53,12 +54,13 @@ interface Organizations {
 }
 
 interface PropsTheme {
-  toggleTheme(): void;
+  toggleTheme?(): void;
 }
 
-const Home: React.FC<PropsTheme> = ({ toggleTheme }) => {
+const Home: React.FC<PropsTheme> = () => {
 
-  const { colors, title } = useContext(ThemeContext);
+  const { title } = useContext(ThemeContext);
+  const { toggleTheme } = useTheme();
 
   const { addOrgFavorites, removeOrgFavorites, favorites } = useFavorites();
   const { addOrgLog } = useLogOrg();

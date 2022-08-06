@@ -23,7 +23,7 @@ import Settings from '../pages/Settings';
 const App = createStackNavigator();
 
 interface PropsTheme {
-  toggleTheme(): void;
+  toggleTheme?(): void;
 }
 
 const AppRoutes: React.FC<PropsTheme> = ({ toggleTheme }) => {
