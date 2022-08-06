@@ -21,7 +21,6 @@ export const CustomThemeProvider: React.FC<IComponentProps> = ({ children }) => 
 
   async function loadTheme(){
     const storagedTheme = await AsyncStorage.getItem('@OrgNote:theme');
-    // const { 'sarabela-theme': localTheme } = parseCookies();
     if(!storagedTheme){
       setTheme(light);
       await AsyncStorage.setItem('@OrgNote:theme', JSON.stringify(dark));
@@ -43,9 +42,6 @@ export const CustomThemeProvider: React.FC<IComponentProps> = ({ children }) => 
       setTheme(light);
       await AsyncStorage.setItem('@OrgNote:theme', JSON.stringify(light));
     }
-
-    // setTheme(theme?.title === 'light' ? dark : light);
-
   }, [theme?.title]);
 
   return (
