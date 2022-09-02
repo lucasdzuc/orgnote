@@ -25,6 +25,10 @@ const Settings: React.FC = () => {
     navigation.navigate('LogOrg');
   }, []);
 
+  const handleNavigateAbout = useCallback(() => {
+    navigation.navigate('About');
+  }, []);
+
   const clearLog = useCallback(() => {
     Alert.alert(
       "Limpar histórico?",
@@ -67,6 +71,11 @@ const Settings: React.FC = () => {
         <ButtonOptionSetting onPress={logOrg.length > 0 ? clearLog : handleAlert} activeOpacity={0.7}>
           <Icon name="trash" size={22} color={title === 'light' ? "#222" : "#FAFAFA" } />
           <TextButtonOptionSetting>Excluir histórico</TextButtonOptionSetting>
+        </ButtonOptionSetting>
+
+        <ButtonOptionSetting onPress={handleNavigateAbout} activeOpacity={0.7}>
+          <Icon name="info" size={22} color={title === 'light' ? "#222" : "#FAFAFA" } />
+          <TextButtonOptionSetting>Sobre</TextButtonOptionSetting>
         </ButtonOptionSetting>
 
       </ContentButtons>

@@ -16,6 +16,7 @@ import Search from '../pages/Search';
 import Favorites from '../pages/Favorites';
 import LogOrg from '../pages/LogOrg';
 import Settings from '../pages/Settings';
+import About from '../pages/About';
 
 // IMPORT COMPONENTS
 // import Header from '../components/Header';
@@ -236,6 +237,45 @@ const AppRoutes: React.FC<PropsTheme> = ({ toggleTheme }) => {
             // headerRightContainerStyle: {
             //   marginRight: 24,
             // },
+          })}
+        />
+
+        <App.Screen
+          name="About"
+          component={About}
+          options={({ navigation }) => ({
+            headerLeft: () => (
+              <Icon
+                name="arrow-left"
+                size={24}
+                color={title === 'light' ? '#000' : '#FAFAFA'}
+                onPress={() => navigation.goBack()}
+                style={{ paddingHorizontal: 24 }}
+              />
+            ),
+            // headerRight: () => (
+            //   <Icon
+            //     name="trash"
+            //     size={20}
+            //     color={title === 'light' ? '#000' : '#FAFAFA'}
+            //     style={{ paddingHorizontal: 24 }}
+            //     onPress={clearLog}
+            //   />
+            // ),
+            headerShown: true,
+            title: 'Sobre',
+            headerTitleAlign: 'center',
+            headerTitleStyle: {
+              fontFamily: 'arimoregular',
+              fontSize: 16,
+              color: title === 'light' ? '#000' : '#FAFAFA',
+            },
+            headerStyle: {
+              backgroundColor: title === 'light' ? '#FAFAFA' : '#000',
+              elevation: 0,
+              borderWidth: 0,
+              shadowColor: 'transparent',
+            }
           })}
         />
 
